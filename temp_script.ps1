@@ -1,0 +1,5 @@
+$featureDescription = @"
+AI/Spec-Driven Book — Module 1: The Robotic Nervous System (ROS 2) Target audience: Beginner/intermediate robotics learners. Focus: ROS 2 basics, communication models, Python agents with rclpy, and URDF for humanoids. Chapters: Intro to ROS 2 — Purpose, architecture, Nodes/Topics/Services overview. ROS 2 Communication — Message flow, QoS, robot control examples. Python Agents & URDF — rclpy agent bridge, controller communication, URDF basics. Success criteria: Clear, technically correct explanations. Concepts aligned with official ROS 2 docs. Simple diagrams included where needed. Fully spec-driven for Docusaurus generation. Constraints: 12–15 pages total for Module 1. MDX format. No plagiarism. Avoid deep control theory or hardware details. Not building: OS-specific installation guides. Full robot mechanics. Complete Python or robotics courses.
+"@
+
+.specify/scripts/powershell/create-new-feature.ps1 -Number 1 -ShortName "ros2-module-1" -FeatureDescription $featureDescription -Json
