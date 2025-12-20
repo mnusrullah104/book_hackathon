@@ -8,9 +8,9 @@ const sidebars = {
       type: 'category',
       label: '1. Module 1: Robotic Communication Systems',
       items: [
-        'module-1/01-ros2-fundamentals',
-        'module-1/02-python-agents-rclpy',
-        'module-1/03-humanoid-urdf',
+        'module-1/ros2-fundamentals',
+        'module-1/python-agents-rclpy',
+        'module-1/humanoid-urdf',
       ],
     },
     {

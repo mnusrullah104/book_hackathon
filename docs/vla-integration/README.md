@@ -28,9 +28,9 @@ This module assumes familiarity with:
 
 ## Module Structure
 
-- [Chapter 1: Voice-to-Action Pipelines](./chapter-1-voice-to-action-pipelines.md)
-- [Chapter 2: Cognitive Planning with LLMs](./chapter-2-cognitive-planning-with-llms.md)
-- [Chapter 3: Capstone — The Autonomous Humanoid](./chapter-3-capstone-autonomous-humanoid.md)
+- [Chapter 1: Voice-to-Action Pipelines](./4.1-chapter-1-voice-to-action-pipelines.md)
+- [Chapter 2: Cognitive Planning with LLMs](./4.2-chapter-2-cognitive-planning-with-llms.md)
+- [Chapter 3: Capstone — The Autonomous Humanoid](./4.3-chapter-3-capstone-autonomous-humanoid.md)
 
 ## Integration
 

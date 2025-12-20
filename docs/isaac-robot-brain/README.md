@@ -26,9 +26,9 @@ This module assumes familiarity with:
 
 ## Module Structure
 
-- [Chapter 1: Isaac Sim Fundamentals](./chapter-1-isaac-sim-fundamentals.md)
-- [Chapter 2: Isaac ROS for Perception and VSLAM](./chapter-2-isaac-ros-perception-vslam.md)
-- [Chapter 3: Navigation with Nav2 for Humanoids](./chapter-3-navigation-with-nav2-humanoids.md)
+- [Chapter 1: Isaac Sim Fundamentals](./3.1-chapter-1-isaac-sim-fundamentals.md)
+- [Chapter 2: Isaac ROS for Perception and VSLAM](./3.2-chapter-2-isaac-ros-perception-vslam.md)
+- [Chapter 3: Navigation with Nav2 for Humanoids](./3.3-chapter-3-navigation-with-nav2-humanoids.md)
 
 ## Integration
 

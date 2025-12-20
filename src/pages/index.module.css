@@ -8,10 +8,11 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-darkest) 100%);
+  background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
   color: white;
   margin-bottom: 2rem;
   border-radius: 0 0 var(--ifm-card-border-radius) var(--ifm-card-border-radius);
+  box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
 }
 
 @media screen and (max-width: 996px) {
@@ -61,18 +62,18 @@ html[data-theme='dark'] .card {
 .cardIcon {
   font-size: 3rem;
   margin-bottom: 1rem;
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-purple-primary);
 }
 
 .cardTitle {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: var(--ifm-color-primary-darker);
+  color: var(--ifm-color-purple-darker);
 }
 
 html[data-theme='dark'] .cardTitle {
-  color: var(--ifm-color-primary-lighter);
+  color: var(--ifm-color-purple-lighter);
 }
 
 .cardDescription {

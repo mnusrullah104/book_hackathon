@@ -4,8 +4,13 @@ const ThemeContext = createContext();
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
+  // Return default values if used outside ThemeProvider
   if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    return {
+      theme: 'light',
+      toggleTheme: () => {},
+      setTheme: () => {},
+    };
   }
   return context;
 };
