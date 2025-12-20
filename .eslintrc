@@ -1,0 +1,6 @@
+{
+  "extends": ["@docusaurus/eslint-config"],
+  "rules": {
+    "no-console": "warn"
+  }
+}
