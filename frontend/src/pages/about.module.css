@@ -1,0 +1,247 @@
+/* About Page - Matching Homepage Theme */
+.aboutPage {
+  padding: 0;
+  background: var(--ifm-background-color);
+  min-height: 100vh;
+}
+
+/* Hero Section - Like Homepage Banner */
+.aboutHero {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 4rem 2rem 3.5rem;
+  background: #12081F;
+  text-align: center;
+  color: white;
+}
+
+/* Clean Square Grid Pattern - Matching Homepage */
+.aboutHero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, #2E1A47 1px, transparent 1px),
+    linear-gradient(to bottom, #2E1A47 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.4;
+}
+
+.aboutHero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Badge - Matching Homepage */
+.aboutBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.35rem;
+  background: rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 50px;
+  color: #DCD7FE;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.badgeIcon {
+  font-size: 1rem;
+}
+
+/* Title - Clean Flat */
+.aboutTitle {
+  font-size: 2.75rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 1.25rem 0;
+  letter-spacing: -0.02em;
+  color: #F5F3FF;
+}
+
+/* Subtitle */
+.aboutSubtitle {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  margin: 0 auto;
+  color: #DCD7FE;
+  max-width: 700px;
+  font-weight: 400;
+}
+
+/* Content Section */
+.aboutContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+}
+
+/* Features Grid - Like Homepage Cards */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 5rem;
+}
+
+/* Feature Cards - Matching Homepage Style */
+.featureCard {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px 0 rgba(109, 40, 217, 0.08);
+  border: 1px solid #EDE9FE;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+html[data-theme='dark'] .featureCard {
+  background: #1C0F2E;
+  border-color: #2E1A47;
+  box-shadow: 0 2px 4px 0 rgba(109, 40, 217, 0.2);
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px 0 rgba(109, 40, 217, 0.15);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+html[data-theme='dark'] .featureCard:hover {
+  box-shadow: 0 4px 8px 0 rgba(124, 58, 237, 0.25);
+  border-color: rgba(167, 139, 250, 0.4);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #A78BFA;
+}
+
+.featureTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #6D28D9;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.01em;
+}
+
+html[data-theme='dark'] .featureTitle {
+  color: #A78BFA;
+}
+
+.featureDesc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #5B21B6;
+  margin: 0;
+}
+
+html[data-theme='dark'] .featureDesc {
+  color: #DCD7FE;
+}
+
+/* CTA Section */
+.ctaSection {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #FAF9FF;
+  border-radius: 12px;
+  border: 1px solid #EDE9FE;
+}
+
+html[data-theme='dark'] .ctaSection {
+  background: #1C0F2E;
+  border-color: #2E1A47;
+}
+
+.ctaTitle {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #6D28D9;
+  margin: 0 0 1rem 0;
+}
+
+html[data-theme='dark'] .ctaTitle {
+  color: #F5F3FF;
+}
+
+.ctaSubtitle {
+  font-size: 1.1rem;
+  color: #5B21B6;
+  margin: 0 0 2rem 0;
+}
+
+html[data-theme='dark'] .ctaSubtitle {
+  color: #DCD7FE;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.75rem;
+  background: #6D28D9;
+  border: none;
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ctaButton:hover {
+  background: #7C3AED;
+  transform: translateY(-2px);
+  color: #FFFFFF;
+}
+
+.btnIcon {
+  font-size: 1.15rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .aboutHero {
+    padding: 3rem 1.5rem 2.5rem;
+  }
+
+  .aboutTitle {
+    font-size: 2rem;
+  }
+
+  .aboutSubtitle {
+    font-size: 1rem;
+  }
+
+  .aboutContent {
+    padding: 3rem 1.5rem;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .ctaTitle {
+    font-size: 1.75rem;
+  }
+
+  .ctaButton {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}

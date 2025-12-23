@@ -1,0 +1,20 @@
+css/custom.css:283:  background: linear-gradient(135deg, var(--ifm-color-purple-primary) 0%, var(--ifm-color-purple-secondary) 100%);
+css/custom.css:435:  background: linear-gradient(90deg, var(--ifm-color-primary), transparent);
+css/custom.css:647:  background: linear-gradient(135deg, #8a2be2 0%, #6a16c2 100%); /* Purple gradient */
+css/custom.css:740:  background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
+css/custom.css:797:    background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
+css/custom.css:836:    background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
+css/custom.css:889:  background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
+css/custom.css:921:  background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
+css/custom.css:953:  background: linear-gradient(90deg, var(--ifm-color-purple-primary), transparent);
+css/custom.css:964:  background: linear-gradient(135deg, var(--ifm-color-purple-light) 0%, white 100%);
+css/custom.css:1000:  background: linear-gradient(135deg, var(--ifm-color-purple-light) 0%, var(--ifm-color-purple-tertiary) 100%);
+css/custom.css:1020:  background: linear-gradient(135deg, rgba(138, 43, 226, 0.15) 0%, rgba(138, 43, 226, 0.1) 100%);
+css/custom.css:1030:  background: linear-gradient(135deg, #4285f4 0%, #34a853 33%, #fbbc05 66%, #ea4335 100%);
+css/custom.css:1089:  background: linear-gradient(90deg, var(--ifm-color-purple-primary), transparent);
+css/custom.css:1111:  background: linear-gradient(90deg, var(--ifm-color-purple-secondary), transparent);
+css/custom.css:1163:  background: linear-gradient(90deg, var(--ifm-color-primary), transparent);
+pages/about.module.css:33:  background: linear-gradient(90deg, var(--ifm-color-purple-primary), transparent);
+pages/about.module.css:60:  background: linear-gradient(135deg, var(--ifm-color-purple-light) 0%, white 100%);
+pages/index.module.css:11:  background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
+pages/index.module.css:91:  background: linear-gradient(135deg, #ffffff 0%, #e6f9f5 100%);
