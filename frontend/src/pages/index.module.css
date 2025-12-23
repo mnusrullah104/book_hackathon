@@ -100,7 +100,7 @@
   margin-top: 0;
 }
 
-/* Primary Button - Clean Purple, NO Glow */
+/* Primary Button - Hidden by default, visible on hover */
 .btnPrimary {
   display: inline-flex;
   align-items: center;
@@ -114,14 +114,25 @@
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   position: relative;
   letter-spacing: 0.01em;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
 }
 
 .btnPrimary:hover {
-  background: #7C3AED;
-  transform: translateY(-1px);
+  background: #8B5CF6;
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Show primary button on hero banner hover */
+.heroBanner:hover .btnPrimary {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 /* Secondary Button - Clean Outline, NO Glow */
@@ -424,6 +435,8 @@ html[data-theme='dark'] .cardLink:hover {
     min-height: 360px;
     max-height: 70vh;
     padding-bottom: 2.25rem;
+    padding-top: 3.5rem !important;
+    margin-top: 0 !important;
   }
 
   .heroContent {
@@ -537,6 +550,8 @@ html[data-theme='dark'] .cardLink:hover {
     min-height: 340px;
     max-height: 65vh;
     padding-bottom: 2rem;
+    padding-top: 3.5rem !important;
+    margin-top: 0 !important;
   }
 
   .heroContent {
