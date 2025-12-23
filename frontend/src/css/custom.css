@@ -1333,7 +1333,20 @@ html[data-theme='dark'] .footer {
 
 @media (max-width: 768px) {
   .navbar__toggle {
-    display: inline-block;
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .navbar {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+  }
+
+  .navbar__inner {
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   .main-wrapper .container {
@@ -1368,6 +1381,24 @@ html[data-theme='dark'] .footer {
 }
 
 @media (max-width: 576px) {
+  .navbar {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+    position: relative !important;
+  }
+
+  .navbar__inner {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .navbar__brand {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+  }
+
   .navbar__item {
     display: none;
   }
@@ -1811,9 +1842,11 @@ a[class*='editThisPage'],
   padding: 0.75rem 1.5rem !important;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 2000;
   transition: all 0.3s ease;
   margin-bottom: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* CRITICAL: Remove ALL gap between navbar and banner - AGGRESSIVE FIX */
@@ -2082,25 +2115,37 @@ button[class*='colorMode']:hover svg {
 @media (max-width: 996px) {
   .navbar {
     padding: 0.5rem 1rem !important;
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    height: auto !important;
+    min-height: 56px !important;
+    overflow: visible !important;
   }
 
   .navbar__inner {
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   /* Logo and title on the LEFT */
   .navbar__brand {
     flex: 0 0 auto;
     order: 1;
+    display: flex !important;
+    align-items: center;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
-  /* Hide regular nav items on mobile */
+  /* Hide regular nav items on mobile (they go in hamburger menu) */
   .navbar__items:not(.navbar__items--right) {
     display: none !important;
   }
@@ -2111,10 +2156,15 @@ button[class*='colorMode']:hover svg {
     order: 3;
     align-items: center;
     gap: 0.5rem;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   /* Hamburger menu button */
   .navbar__toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     color: var(--ifm-navbar-link-color) !important;
     background: none !important;
     border: none !important;
@@ -2132,5 +2182,19 @@ button[class*='colorMode']:hover svg {
   button[class*='colorMode'] {
     display: inline-flex !important;
     visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Ensure navbar sidebar is properly visible when opened */
+  .navbar-sidebar {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .navbar-sidebar--show {
+    transform: translateX(0) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
