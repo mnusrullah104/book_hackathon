@@ -6,40 +6,59 @@ slug: /
 import styles from './index.module.css';
 
 <div className={styles.heroBanner}>
-  <h1 className="hero__title">AI-Native Robotics Book</h1>
-  <p className="hero__subtitle">A comprehensive guide to ROS 2, AI agents, and humanoid robotics</p>
-  <div className={styles.buttons}>
-    <a className="button button--secondary button--lg" href="/docs/module-1/ros2-fundamentals">
-      Get Started
-    </a>
-    <a className="button button--outline button--lg" href="/docs/module-1/python-agents-rclpy">
-      Learn More
-    </a>
+  <div className={styles.heroContent}>
+    <div className={styles.heroBadge}>
+      <span className={styles.badgeIcon}>✨</span>
+      <span>AI-Powered Learning</span>
+    </div>
+    <h1 className={styles.heroTitle}>
+      Physical AI & Humanoid Robotics
+    </h1>
+    <p className={styles.heroSubtitle}>
+      Master intelligent robot systems with ROS 2, Isaac Sim, and AI agents. Build real-world humanoid robots with cutting-edge AI and simulation technologies.
+    </p>
+    <div className={styles.heroButtons}>
+      <a href="/docs/module-1/ros2-fundamentals" className={styles.btnPrimary}>
+        <span className={styles.btnIcon}>🚀</span>
+        <span>Start Learning</span>
+      </a>
+      <a href="/about" className={styles.btnSecondary}>
+        <span className={styles.btnIcon}>📖</span>
+        <span>Explore Content</span>
+      </a>
+    </div>
   </div>
 </div>
 
-<div className={styles.featuresSection}>
-  <div className={styles.cardContainer}>
+<div className={styles.cardsSection}>
+  <div className={styles.cardsGrid}>
     <div className={styles.card}>
       <div className={styles.cardIcon}>🤖</div>
       <h3 className={styles.cardTitle}>ROS 2 Fundamentals</h3>
-      <p className={styles.cardDescription}>
-        Master the core concepts of Robot Operating System 2 including nodes, topics, services, and communication patterns.
-      </p>
+      <p className={styles.cardDesc}>Master robot communication, nodes, topics, and Python agents for intelligent behavior.</p>
+      <a href="/docs/module-1/ros2-fundamentals" className={styles.cardLink}>Learn More →</a>
     </div>
+
+    <div className={styles.card}>
+      <div className={styles.cardIcon}>🎮</div>
+      <h3 className={styles.cardTitle}>Simulation & Testing</h3>
+      <p className={styles.cardDesc}>Build digital twins with Gazebo and Unity for rapid prototyping and validation.</p>
+      <a href="/docs/module-2/2.1-physics-simulation-gazebo" className={styles.cardLink}>Learn More →</a>
+    </div>
+
+    <div className={styles.card}>
+      <div className={styles.cardIcon}>👁️</div>
+      <h3 className={styles.cardTitle}>Computer Vision</h3>
+      <p className={styles.cardDesc}>Implement Isaac Sim perception, Visual SLAM, and autonomous navigation systems.</p>
+      <a href="/docs/isaac-robot-brain/3.1-chapter-1-isaac-sim-fundamentals" className={styles.cardLink}>Learn More →</a>
+    </div>
+
     <div className={styles.card}>
       <div className={styles.cardIcon}>🧠</div>
-      <h3 className={styles.cardTitle}>AI Agents Integration</h3>
-      <p className={styles.cardDescription}>
-        Learn how to create communication nodes in Python and bridge AI agents to robot controllers for intelligent behaviors.
-      </p>
-    </div>
-    <div className={styles.card}>
-      <div className={styles.cardIcon}>🦾</div>
-      <h3 className={styles.cardTitle}>Humanoid Modeling</h3>
-      <p className={styles.cardDescription}>
-        Understand URDF for modeling humanoid robots with physical components, joints, and sensors.
-      </p>
+      <h3 className={styles.cardTitle}>AI Integration</h3>
+      <p className={styles.cardDesc}>Connect LLMs and VLA models for voice commands and cognitive planning capabilities.</p>
+      <a href="/docs/vla-integration/4.1-chapter-1-voice-to-action-pipelines" className={styles.cardLink}>Learn More →</a>
     </div>
   </div>
 </div>
+

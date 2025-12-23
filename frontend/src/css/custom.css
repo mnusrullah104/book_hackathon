@@ -8,8 +8,9 @@
 /* You can override the default Docusaurus styling with custom CSS here */
 
 :root {
-  /* Typography variables */
-  --ifm-font-size-base: 18px;
+  /* Typography variables - Modern SaaS */
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --ifm-font-size-base: 16px;
   --ifm-line-height-base: 1.6;
   --ifm-heading-line-height: 1.3;
 
@@ -17,7 +18,7 @@
   --ifm-spacing-scale: 1.25;
   --ifm-leading: calc(var(--ifm-line-height-base) * var(--ifm-font-size-base));
 
-  /* Enhanced spacing for book-like reading experience */
+  /* Enhanced spacing for premium feel */
   --ifm-spacing-xs: 0.5rem;
   --ifm-spacing-sm: 0.75rem;
   --ifm-spacing-md: 1rem;
@@ -32,31 +33,33 @@
   --ifm-content-line-height: var(--ifm-line-height-base);
   --ifm-content-font-size: var(--ifm-font-size-base);
 
-  /* Readability-first text colors (high contrast) */
-  --rb-text-body: #1a1a1a;        /* Body text - 16.1:1 contrast on white */
-  --rb-text-heading: #2d2d2d;     /* Headings - high contrast neutral */
-  --rb-text-muted: #4a4a4a;       /* Secondary text - still readable */
-  --rb-bg-code: #f5f5f5;          /* Code block background */
-  --rb-sidebar-text: #333333;     /* Sidebar navigation text */
+  /* ===== CLASSY PURPLE LIGHT MODE ===== */
 
-  /* Dark green color variables (Material Design Green) */
-  --ifm-color-primary: #1b5e20; /* Material Green 900 - 9.7:1 contrast on white */
-  --ifm-color-primary-dark: #145c1a; /* Darker shade */
-  --ifm-color-primary-darker: #114d16; /* Even darker shade */
-  --ifm-color-primary-darkest: #0d3910; /* Darkest shade */
-  --ifm-color-primary-light: #388e3c; /* Material Green 700 - for hover states */
-  --ifm-color-primary-lighter: #4caf50; /* Material Green 500 */
-  --ifm-color-primary-lightest: #66bb6a; /* Material Green 400 */
+  /* Text Colors - Light Mode */
+  --rb-text-body: #2E1065;        /* Text Primary */
+  --rb-text-heading: #2E1065;     /* Headings */
+  --rb-text-muted: #5B21B6;       /* Text Secondary */
+  --rb-bg-code: #FAF9FF;          /* Code background */
+  --rb-sidebar-text: #2E1065;     /* Sidebar text */
 
-  /* Additional purple-based theme colors */
-  --ifm-color-purple-primary: #8a2be2;
-  --ifm-color-purple-secondary: #9d4edd;
-  --ifm-color-purple-tertiary: #c77dff;
-  --ifm-color-purple-accent: #e0aaff;
-  --ifm-color-purple-light: #f3e8ff;
-  --ifm-color-purple-dark: #5a189a;
-  --ifm-color-purple-gradient-start: #7b2cbf;
-  --ifm-color-purple-gradient-end: #5a189a;
+  /* CLASSY PURPLE Color System - LIGHT MODE */
+  --ifm-color-primary: #6D28D9;   /* Primary Purple */
+  --ifm-color-primary-dark: #5B21B6;
+  --ifm-color-primary-darker: #4C1D95;
+  --ifm-color-primary-darkest: #3B0764;
+  --ifm-color-primary-light: #7C3AED;
+  --ifm-color-primary-lighter: #9333EA;
+  --ifm-color-primary-lightest: #A78BFA;
+
+  /* Purple Theme Palette - LIGHT MODE */
+  --ifm-color-purple-primary: #6D28D9;    /* Primary purple */
+  --ifm-color-purple-secondary: #7C3AED;  /* Secondary purple */
+  --ifm-color-purple-tertiary: #9333EA;   /* Tertiary */
+  --ifm-color-purple-accent: #A78BFA;     /* Accent icons */
+  --ifm-color-purple-light: #FAF9FF;      /* Very light purple bg */
+  --ifm-color-purple-dark: #5B21B6;
+  --ifm-color-purple-gradient-start: #7C3AED;
+  --ifm-color-purple-gradient-end: #6D28D9;
 
   /* Enhanced color palette */
   --ifm-color-emphasis-0: #000000;
@@ -71,71 +74,67 @@
   --ifm-color-emphasis-900: #f0f0f4;
   --ifm-color-emphasis-1000: #ffffff;
 
-  /* Background colors */
-  --ifm-color-content: #ffffff;
-  --ifm-color-content-inverse: #242526;
-  --ifm-background-color: #ffffff;
-  --ifm-background-surface-color: #ffffff;
+  /* Background colors - LIGHT MODE */
+  --ifm-color-content: #FFFFFF;           /* Surface/Cards */
+  --ifm-color-content-inverse: #12081F;   /* Dark mode bg */
+  --ifm-background-color: #FAF9FF;        /* Main background */
+  --ifm-background-surface-color: #FFFFFF; /* Cards/Surface */
 
-  /* Card styling */
-  --ifm-card-background-color: #ffffff;
+  /* Borders & Dividers - LIGHT MODE */
+  --ifm-border-color: #EDE9FE;
+  --ifm-hr-background-color: #EDE9FE;
+
+  /* Status Colors - LIGHT MODE */
+  --ifm-color-success: #22C55E;
+  --ifm-color-danger: #EF4444;
+  --ifm-color-warning: #F59E0B;
+  --ifm-color-info: #6D28D9;
+
+  /* Card styling - Clean Purple */
+  --ifm-card-background-color: #FFFFFF;
   --ifm-card-border-radius: 12px;
-  --ifm-card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  --ifm-card-shadow: 0 1px 3px 0 rgba(109, 40, 217, 0.08);
 
-  /* Navbar styling */
-  --ifm-navbar-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  --ifm-navbar-link-color: #2d2d2d; /* Dark gray for readability */
-  --ifm-navbar-link-hover-color: var(--ifm-color-primary); /* Green on hover */
+  /* Navbar styling - LIGHT MODE */
+  --ifm-navbar-background-color: #FFFFFF;
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(109, 40, 217, 0.08);
+  --ifm-navbar-link-color: #2E1065;
+  --ifm-navbar-link-hover-color: #A78BFA;
 
   /* Code block styling */
   --ifm-code-font-size: 95%;
+  --ifm-code-background: #FAF5FF;
 
   /* Content container */
   --ifm-container-width: 1200px;
   --ifm-container-padding-horizontal: 2rem;
 }
 
-/* Homepage full-width layout - remove container constraints */
-.main-wrapper[class*='mainWrapper'] {
-  padding: 0 !important; /* Remove default padding */
-  max-width: 100% !important;
-  width: 100% !important;
+/* ===== HOMEPAGE SPECIFIC FULL-WIDTH LAYOUT ===== */
+/* Only apply full-width on pages that explicitly need it (homepage) */
+
+/* Target only markdown pages (like index.md) */
+.markdown > div[class*='heroBanner'],
+.markdown > div[class*='cardsSection'] {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.main-wrapper main {
-  padding: 0 !important; /* Remove main content padding for homepage */
-  max-width: 100% !important;
-  width: 100% !important;
-}
-
-/* Ensure homepage sections are truly full-width */
-main[class*='docMainContainer'] {
-  padding: 0 !important;
-  max-width: 100% !important;
-  width: 100% !important;
-}
-
-main[class*='docMainContainer'] .container {
-  padding: 0 !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-/* Override any Docusaurus container styling on homepage */
-.markdown .container,
-article .container {
-  max-width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-/* Ensure body and html don't constrain width */
+/* Ensure body and html don't constrain width but prevent horizontal scroll */
 body, html {
   overflow-x: hidden; /* Prevent horizontal scroll */
   width: 100%;
   max-width: 100%;
+}
+
+/* Keep doc pages with normal container behavior */
+.docPage .container {
+  max-width: var(--ifm-container-width);
+  padding-left: var(--ifm-container-padding-horizontal);
+  padding-right: var(--ifm-container-padding-horizontal);
 }
 
 .docusaurus-highlight-code-line {
@@ -146,31 +145,33 @@ body, html {
 }
 
 html[data-theme='dark'] {
-  /* Readability-first text colors for dark mode (high contrast) */
-  --rb-text-body: #e8e8e8;        /* Body text - 14.5:1 contrast on #121212 */
-  --rb-text-heading: #f0f0f0;     /* Headings - high contrast neutral */
-  --rb-text-muted: #b0b0b0;       /* Secondary text - still readable */
-  --rb-bg-code: #1e1e1e;          /* Code block background */
-  --rb-sidebar-text: #d0d0d0;     /* Sidebar navigation text */
+  /* ===== CLASSY PURPLE DARK MODE (PRIMARY) ===== */
 
-  /* Light green colors for dark backgrounds (Material Design Green) */
-  --ifm-color-primary: #66bb6a; /* Material Green 400 - 7.8:1 contrast on black */
-  --ifm-color-primary-dark: #4caf50; /* Material Green 500 */
-  --ifm-color-primary-darker: #388e3c; /* Material Green 700 */
-  --ifm-color-primary-darkest: #2e7d32; /* Material Green 800 */
-  --ifm-color-primary-light: #81c784; /* Material Green 300 - for hover states */
-  --ifm-color-primary-lighter: #a5d6a7; /* Material Green 200 */
-  --ifm-color-primary-lightest: #c8e6c9; /* Material Green 100 */
+  /* Text Colors - DARK MODE */
+  --rb-text-body: #F5F3FF;        /* Text Primary */
+  --rb-text-heading: #F5F3FF;     /* Headings - clean flat */
+  --rb-text-muted: #DCD7FE;       /* Text Secondary */
+  --rb-bg-code: #1C0F2E;          /* Code background */
+  --rb-sidebar-text: #F5F3FF;     /* Sidebar text */
 
-  /* Additional purple-based theme colors for dark mode */
-  --ifm-color-purple-primary: #aa60ee;
-  --ifm-color-purple-secondary: #c77dff;
-  --ifm-color-purple-tertiary: #e0aaff;
-  --ifm-color-purple-accent: #f8f0ff;
-  --ifm-color-purple-light: #f3e8ff;
-  --ifm-color-purple-dark: #9d4edd;
-  --ifm-color-purple-gradient-start: #9d4edd;
-  --ifm-color-purple-gradient-end: #7b2cbf;
+  /* CLASSY PURPLE Color System - DARK MODE */
+  --ifm-color-primary: #6D28D9;   /* Primary Purple */
+  --ifm-color-primary-dark: #5B21B6;
+  --ifm-color-primary-darker: #4C1D95;
+  --ifm-color-primary-darkest: #3B0764;
+  --ifm-color-primary-light: #7C3AED;
+  --ifm-color-primary-lighter: #9333EA;
+  --ifm-color-primary-lightest: #A78BFA;
+
+  /* Purple Theme Palette - DARK MODE */
+  --ifm-color-purple-primary: #6D28D9;    /* Primary purple */
+  --ifm-color-purple-secondary: #7C3AED;  /* Secondary purple */
+  --ifm-color-purple-tertiary: #9333EA;   /* Tertiary */
+  --ifm-color-purple-accent: #A78BFA;     /* Accent icons only */
+  --ifm-color-purple-light: #26143F;      /* Elevated surface */
+  --ifm-color-purple-dark: #5B21B6;
+  --ifm-color-purple-gradient-start: #7C3AED;
+  --ifm-color-purple-gradient-end: #6D28D9;
 
   /* Enhanced dark theme color palette */
   --ifm-color-emphasis-0: #ffffff;
@@ -185,22 +186,36 @@ html[data-theme='dark'] {
   --ifm-color-emphasis-900: #1c1e21;
   --ifm-color-emphasis-1000: #0c0c0d;
 
-  /* Dark theme background colors */
-  --ifm-color-content: #242526;
-  --ifm-color-content-inverse: #ffffff;
-  --ifm-background-color: #0c0c0d;
-  --ifm-background-surface-color: #1c1e21;
+  /* Background colors - DARK MODE (CLASSY PURPLE) */
+  --ifm-color-content: #1C0F2E;           /* Surface/Cards */
+  --ifm-color-content-inverse: #FFFFFF;
+  --ifm-background-color: #12081F;        /* Main background */
+  --ifm-background-surface-color: #1C0F2E; /* Cards/Surface */
 
-  /* Dark theme card styling */
-  --ifm-card-background-color: #1c1e21;
-  --ifm-card-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  /* Borders & Dividers - DARK MODE */
+  --ifm-border-color: #2E1A47;
+  --ifm-hr-background-color: #2E1A47;
 
-  /* Dark theme navbar styling */
-  --ifm-navbar-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  --ifm-navbar-link-color: #e8e8e8; /* Light gray for readability in dark mode */
-  --ifm-navbar-link-hover-color: var(--ifm-color-primary); /* Light green on hover */
+  /* Status Colors - DARK MODE */
+  --ifm-color-success: #4ADE80;
+  --ifm-color-danger: #F87171;
+  --ifm-color-warning: #FBBF24;
+  --ifm-color-info: #A78BFA;
 
-  /* Dark theme content container */
+  /* Card styling - Clean DARK MODE */
+  --ifm-card-background-color: #1C0F2E;
+  --ifm-card-shadow: 0 2px 4px 0 rgba(109, 40, 217, 0.2);
+
+  /* Navbar styling - Clean DARK MODE */
+  --ifm-navbar-background-color: #1C0F2E;
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(109, 40, 217, 0.2);
+  --ifm-navbar-link-color: #DCD7FE;
+  --ifm-navbar-link-hover-color: #A78BFA;
+
+  /* Code block styling - DARK MODE */
+  --ifm-code-background: #160B2E;
+
+  /* Content container */
   --ifm-container-width: 1200px;
   --ifm-container-padding-horizontal: 2rem;
 }
@@ -209,89 +224,29 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* Enhanced navbar styling with subtle animations */
-.navbar {
-  box-shadow: var(--ifm-navbar-shadow);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
+/* Navbar styling moved to consolidated section below (line ~1225) */
 
-.navbar__logo {
-  height: 40px;
-  width: 40px;
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.navbar__logo:hover {
-  transform: scale(1.05) rotate(2deg);
-}
-
-.navbar__title {
-  font-weight: 600;
-  font-size: 1.2rem;
-  transition: color 0.3s ease;
-  color: var(--ifm-navbar-link-color);
-}
-
-.navbar__title:hover {
-  color: var(--ifm-navbar-link-hover-color);
-}
-
-/* Theme toggle button visibility */
-button[class*='toggle'][class*='colorMode'],
-button[class*='toggleButton'],
-.navbar__toggle,
-button[title*='dark'],
-button[title*='light'] {
-  color: var(--ifm-navbar-link-color) !important;
-  opacity: 1 !important;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-}
-
-button[class*='toggle'][class*='colorMode'] svg,
-button[class*='toggleButton'] svg,
-.navbar__toggle svg {
-  fill: var(--ifm-navbar-link-color);
-  color: var(--ifm-navbar-link-color);
-}
-
-button[class*='toggle'][class*='colorMode']:hover,
-button[class*='toggleButton']:hover,
-.navbar__toggle:hover {
-  color: var(--ifm-navbar-link-hover-color) !important;
-}
-
-button[class*='toggle'][class*='colorMode']:hover svg,
-button[class*='toggleButton']:hover svg,
-.navbar__toggle:hover svg {
-  fill: var(--ifm-navbar-link-hover-color);
-  color: var(--ifm-navbar-link-hover-color);
-}
-
-.navbar__item {
-  transition: color 0.3s ease, transform 0.2s ease;
-  color: var(--ifm-navbar-link-color);
-}
-
-.navbar__link {
-  color: var(--ifm-navbar-link-color);
-}
-
-.navbar__item:hover,
-.navbar__link:hover {
-  color: var(--ifm-navbar-link-hover-color);
-  transform: translateY(-1px);
-}
-
-/* Subtle hover animations for links */
+/* Clean link styling for both modes */
 .markdown a {
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  transition: color 0.2s ease;
+  color: #6D28D9;
+  text-decoration: underline;
+  text-decoration-color: rgba(109, 40, 217, 0.3);
 }
 
 .markdown a:hover {
-  color: var(--ifm-color-purple-primary);
-  text-shadow: 0 0 8px rgba(138, 43, 226, 0.3);
+  color: #7C3AED;
+  text-decoration-color: rgba(124, 58, 237, 0.5);
+}
+
+html[data-theme='dark'] .markdown a {
+  color: #A78BFA;
+  text-decoration-color: rgba(167, 139, 250, 0.4);
+}
+
+html[data-theme='dark'] .markdown a:hover {
+  color: #DCD7FE;
+  text-decoration-color: rgba(220, 215, 254, 0.6);
 }
 
 /* Smooth transitions for interactive elements */
@@ -322,20 +277,567 @@ html {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Enhanced focus states for accessibility */
-button:focus,
-a:focus,
-input:focus,
-select:focus,
-textarea:focus {
+/* Clean focus states - NO glow */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   outline: 2px solid var(--ifm-color-purple-primary);
   outline-offset: 2px;
+}
+
+/* Fallback for browsers that don't support :focus-visible */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Dark mode focus states */
+html[data-theme='dark'] button:focus-visible,
+html[data-theme='dark'] a:focus-visible,
+html[data-theme='dark'] input:focus-visible,
+html[data-theme='dark'] select:focus-visible,
+html[data-theme='dark'] textarea:focus-visible {
+  outline-color: var(--ifm-color-purple-secondary);
 }
 
 /* Smooth theme transition */
 html {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* LIGHT MODE - Enhanced Typography & Content */
+html[data-theme='light'] h1,
+html[data-theme='light'] h2,
+html[data-theme='light'] h3,
+html[data-theme='light'] h4 {
+  color: #2E1065;
+}
+
+html[data-theme='light'] .markdown h1 {
+  color: #6D28D9;
+  border-bottom: 3px solid #EDE9FE;
+  padding-bottom: 0.5rem;
+}
+
+html[data-theme='light'] .markdown h2 {
+  color: #6D28D9;
+  border-bottom: 2px solid #EDE9FE;
+  padding-bottom: 0.4rem;
+}
+
+html[data-theme='light'] .markdown {
+  color: #2E1065;
+}
+
+html[data-theme='light'] .markdown p {
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .markdown code {
+  background: #EDE9FE;
+  color: #6D28D9;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+html[data-theme='light'] .markdown pre code {
+  background: #FAF9FF;
+  color: #2E1065;
+}
+
+html[data-theme='light'] blockquote {
+  border-left: 4px solid #6D28D9;
+  background: #FAF9FF;
+  color: #5B21B6;
+}
+
+/* ===== LIGHT MODE - COMPREHENSIVE THEME BALANCE ===== */
+
+/* LIGHT MODE - Tables */
+html[data-theme='light'] .markdown table {
+  border-color: #EDE9FE;
+  background: #FFFFFF;
+}
+
+html[data-theme='light'] .markdown table thead {
+  background: #F5F3FF;
+  border-bottom: 2px solid #6D28D9;
+}
+
+html[data-theme='light'] .markdown table th {
+  color: #6D28D9;
+  font-weight: 700;
+  border-color: #EDE9FE;
+}
+
+html[data-theme='light'] .markdown table td {
+  color: #5B21B6;
+  border-color: #EDE9FE;
+}
+
+html[data-theme='light'] .markdown table tr:nth-child(even) {
+  background: #FAF9FF;
+}
+
+html[data-theme='light'] .markdown table tr:hover {
+  background: #F5F3FF;
+}
+
+/* LIGHT MODE - Lists */
+html[data-theme='light'] .markdown ul,
+html[data-theme='light'] .markdown ol {
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .markdown li::marker {
+  color: #6D28D9;
+  font-weight: 600;
+}
+
+/* LIGHT MODE - Admonitions/Callouts */
+html[data-theme='light'] .admonition {
+  border-left: 4px solid #6D28D9;
+  background: #FAF9FF;
+  border-radius: 8px;
+}
+
+html[data-theme='light'] .admonition__title {
+  background: #F5F3FF;
+  color: #6D28D9;
+  font-weight: 700;
+  border-bottom: 1px solid #EDE9FE;
+}
+
+html[data-theme='light'] .admonition__content {
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .admonition--note {
+  border-left-color: #6D28D9;
+}
+
+html[data-theme='light'] .admonition--note .admonition__title {
+  color: #6D28D9;
+}
+
+html[data-theme='light'] .admonition--tip {
+  border-left-color: #10B981;
+}
+
+html[data-theme='light'] .admonition--tip .admonition__title {
+  color: #10B981;
+}
+
+html[data-theme='light'] .admonition--caution {
+  border-left-color: #F59E0B;
+}
+
+html[data-theme='light'] .admonition--caution .admonition__title {
+  color: #F59E0B;
+}
+
+html[data-theme='light'] .admonition--danger {
+  border-left-color: #EF4444;
+}
+
+html[data-theme='light'] .admonition--danger .admonition__title {
+  color: #EF4444;
+}
+
+html[data-theme='light'] .admonition--info {
+  border-left-color: #3B82F6;
+}
+
+html[data-theme='light'] .admonition--info .admonition__title {
+  color: #3B82F6;
+}
+
+html[data-theme='light'] .admonition--success {
+  border-left-color: #10B981;
+}
+
+html[data-theme='light'] .admonition--success .admonition__title {
+  color: #10B981;
+}
+
+/* LIGHT MODE - Sidebar */
+html[data-theme='light'] .theme-doc-sidebar-container {
+  background: #FFFFFF;
+  border-right: 1px solid #EDE9FE;
+}
+
+html[data-theme='light'] .sidebar {
+  background: #FFFFFF;
+  border-right: 1px solid #EDE9FE;
+}
+
+html[data-theme='light'] .menu__link {
+  color: #5B21B6;
+  transition: all 0.2s ease;
+}
+
+html[data-theme='light'] .menu__link:hover {
+  background: #F5F3FF;
+  color: #6D28D9;
+  border-radius: 6px;
+}
+
+html[data-theme='light'] .menu__link--active {
+  color: #6D28D9;
+  background: #F5F3FF;
+  font-weight: 600;
+  border-left: 3px solid #6D28D9;
+}
+
+html[data-theme='light'] .menu__list-item:hover {
+  background-color: rgba(109, 40, 217, 0.05);
+  border-radius: 6px;
+}
+
+html[data-theme='light'] .menu__list-item-collapsible:hover {
+  background: #FAF9FF;
+}
+
+html[data-theme='light'] .menu__list-item-collapsible-title {
+  color: #6D28D9;
+  font-weight: 600;
+}
+
+/* LIGHT MODE - Footer */
+html[data-theme='light'] footer.footer {
+  background: #F5F3FF;
+  border-top: 1px solid #EDE9FE;
+}
+
+html[data-theme='light'] footer.footer .footer__title {
+  color: #6D28D9;
+  font-weight: 700;
+}
+
+html[data-theme='light'] footer.footer a {
+  color: #5B21B6;
+  transition: color 0.2s ease;
+}
+
+html[data-theme='light'] footer.footer a:hover {
+  color: #6D28D9;
+  text-decoration: underline;
+}
+
+html[data-theme='light'] .footer__copyright {
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .footer__link-item {
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .footer__link-item:hover {
+  color: #6D28D9;
+}
+
+/* LIGHT MODE - Buttons in Content */
+html[data-theme='light'] .button {
+  background: #6D28D9;
+  color: #FFFFFF;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+html[data-theme='light'] .button:hover {
+  background: #7C3AED;
+  transform: translateY(-1px);
+  color: #FFFFFF;
+}
+
+html[data-theme='light'] .button--secondary {
+  background: transparent;
+  border: 2px solid #6D28D9;
+  color: #6D28D9;
+}
+
+html[data-theme='light'] .button--secondary:hover {
+  background: #F5F3FF;
+  color: #6D28D9;
+}
+
+html[data-theme='light'] .button--outline {
+  background: transparent;
+  border: 2px solid #6D28D9;
+  color: #6D28D9;
+}
+
+html[data-theme='light'] .button--outline:hover {
+  background: #6D28D9;
+  color: #FFFFFF;
+}
+
+/* LIGHT MODE - Badges */
+html[data-theme='light'] .badge {
+  background: #F5F3FF;
+  color: #6D28D9;
+  border: 1px solid #EDE9FE;
+  font-weight: 600;
+}
+
+html[data-theme='light'] .badge--primary {
+  background: #6D28D9;
+  color: #FFFFFF;
+}
+
+html[data-theme='light'] .badge--secondary {
+  background: #A78BFA;
+  color: #FFFFFF;
+}
+
+/* LIGHT MODE - Cards in Content */
+html[data-theme='light'] .card {
+  background: #FFFFFF;
+  border: 1px solid #EDE9FE;
+  box-shadow: 0 1px 3px 0 rgba(109, 40, 217, 0.08);
+  transition: all 0.2s ease;
+}
+
+html[data-theme='light'] .card:hover {
+  box-shadow: 0 4px 8px 0 rgba(109, 40, 217, 0.15);
+  border-color: rgba(124, 58, 237, 0.3);
+  transform: translateY(-2px);
+}
+
+html[data-theme='light'] .card__header {
+  border-bottom: 1px solid #EDE9FE;
+  background: #FAF9FF;
+}
+
+html[data-theme='light'] .card__footer {
+  border-top: 1px solid #EDE9FE;
+  background: #FAF9FF;
+}
+
+html[data-theme='light'] .card__body {
+  color: #5B21B6;
+}
+
+/* LIGHT MODE - Code Blocks */
+html[data-theme='light'] .prism-code {
+  background: #FAF9FF !important;
+  border: 1px solid #EDE9FE;
+}
+
+html[data-theme='light'] .token-line {
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .token.comment,
+html[data-theme='light'] .token.prolog,
+html[data-theme='light'] .token.doctype {
+  color: #A78BFA;
+  font-style: italic;
+}
+
+html[data-theme='light'] .token.keyword,
+html[data-theme='light'] .token.operator {
+  color: #6D28D9;
+  font-weight: 600;
+}
+
+html[data-theme='light'] .token.string,
+html[data-theme='light'] .token.char {
+  color: #7C3AED;
+}
+
+html[data-theme='light'] .token.function {
+  color: #6D28D9;
+}
+
+html[data-theme='light'] .token.number,
+html[data-theme='light'] .token.boolean {
+  color: #C084FC;
+}
+
+html[data-theme='light'] .token.class-name {
+  color: #7C3AED;
+  font-weight: 600;
+}
+
+html[data-theme='light'] :not(pre) > code {
+  background: #EDE9FE;
+  color: #6D28D9;
+  border: 1px solid rgba(109, 40, 217, 0.2);
+}
+
+/* LIGHT MODE - Pagination */
+html[data-theme='light'] .pagination-nav {
+  gap: 1rem;
+}
+
+html[data-theme='light'] .pagination-nav__link {
+  border: 1px solid #EDE9FE;
+  background: #FFFFFF;
+  transition: all 0.2s ease;
+}
+
+html[data-theme='light'] .pagination-nav__link:hover {
+  background: #F5F3FF;
+  border-color: #6D28D9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(109, 40, 217, 0.1);
+}
+
+html[data-theme='light'] .pagination-nav__label {
+  color: #6D28D9;
+  font-weight: 700;
+}
+
+html[data-theme='light'] .pagination-nav__sublabel {
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .pagination-nav__link--prev,
+html[data-theme='light'] .pagination-nav__link--next {
+  border-color: #EDE9FE;
+}
+
+/* LIGHT MODE - TOC (Table of Contents) */
+html[data-theme='light'] .table-of-contents {
+  border-left: 1px solid #EDE9FE;
+  padding-left: 1rem;
+}
+
+html[data-theme='light'] .table-of-contents__link {
+  color: #5B21B6;
+  transition: all 0.2s ease;
+}
+
+html[data-theme='light'] .table-of-contents__link:hover {
+  color: #6D28D9;
+  text-decoration: none;
+}
+
+html[data-theme='light'] .table-of-contents__link--active {
+  color: #6D28D9;
+  font-weight: 600;
+  border-left: 2px solid #6D28D9;
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+}
+
+html[data-theme='light'] .table-of-contents__link code {
+  background: #EDE9FE;
+  color: #6D28D9;
+}
+
+/* LIGHT MODE - Breadcrumbs */
+html[data-theme='light'] .breadcrumbs__link {
+  color: #5B21B6;
+  transition: color 0.2s ease;
+}
+
+html[data-theme='light'] .breadcrumbs__link:hover {
+  color: #6D28D9;
+  text-decoration: underline;
+}
+
+html[data-theme='light'] .breadcrumbs__item--active .breadcrumbs__link {
+  color: #6D28D9;
+  font-weight: 600;
+}
+
+html[data-theme='light'] .breadcrumbs__separator {
+  color: #A78BFA;
+}
+
+/* LIGHT MODE - Navbar Items */
+html[data-theme='light'] .navbar {
+  background: #FFFFFF;
+  border-bottom: 1px solid #EDE9FE;
+}
+
+html[data-theme='light'] .navbar__item {
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .navbar__link {
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .navbar__link:hover {
+  color: #6D28D9;
+}
+
+html[data-theme='light'] .navbar__link--active {
+  color: #6D28D9;
+  font-weight: 600;
+}
+
+/* LIGHT MODE - Search Bar */
+html[data-theme='light'] .navbar__search-input {
+  background: #FAF9FF;
+  border: 1px solid #EDE9FE;
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .navbar__search-input:focus {
+  border-color: #6D28D9;
+  box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.1);
+}
+
+/* LIGHT MODE - Doc Item Container */
+html[data-theme='light'] .docItemContainer {
+  background: #FFFFFF;
+}
+
+html[data-theme='light'] .docItemContainer article {
+  color: #5B21B6;
+}
+
+/* LIGHT MODE - Module Sections (if any custom sections exist) */
+html[data-theme='light'] .markdown .module-2-intro {
+  background: #F5F3FF;
+  border-left: 4px solid #6D28D9;
+  color: #5B21B6;
+}
+
+html[data-theme='light'] .markdown .gazebo-section {
+  background: #FAF9FF;
+  border-left: 3px solid #7C3AED;
+}
+
+html[data-theme='light'] .markdown .unity-section {
+  background: #FAF9FF;
+  border-left: 3px solid #A78BFA;
+}
+
+html[data-theme='light'] .markdown .sensor-section {
+  background: #F5F3FF;
+  border-left: 3px solid #6D28D9;
+}
+
+/* LIGHT MODE - Scrollbar */
+html[data-theme='light'] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html[data-theme='light'] ::-webkit-scrollbar-track {
+  background: #FAF9FF;
+}
+
+html[data-theme='light'] ::-webkit-scrollbar-thumb {
+  background: rgba(109, 40, 217, 0.3);
+  border-radius: 10px;
+}
+
+html[data-theme='light'] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(109, 40, 217, 0.5);
+}
+
+/* ===== END LIGHT MODE COMPREHENSIVE THEME ===== */
 
 /* Enhanced sidebar item hover effect */
 .menu__list-item:hover {
@@ -675,15 +1177,42 @@ html[data-theme='dark'] .menu__list-item-collapsible-title {
   font-weight: 600;
 }
 
-/* Enhanced sidebar styling */
+/* Enhanced sidebar styling with proper spacing */
 .sidebar {
-  border-right: 1px solid var(--ifm-color-emphasis-300);
+  border-right: 1px solid #EDE9FE;
   background-color: var(--ifm-background-surface-color);
   transition: all 0.3s ease;
 }
 
 html[data-theme='dark'] .sidebar {
-  border-right: 1px solid var(--ifm-color-emphasis-700);
+  border-right: 1px solid #2E1A47;
+}
+
+/* Fix sidebar spacing on docs pages */
+.theme-doc-sidebar-container {
+  margin-right: 2rem !important;
+}
+
+/* Main content area spacing from sidebar */
+main.docMainContainer {
+  margin-left: 2rem !important;
+}
+
+/* Ensure proper spacing between sidebar and content on Books page */
+@media (min-width: 997px) {
+  .docPage {
+    display: grid;
+    grid-template-columns: minmax(280px, 320px) 1fr;
+    gap: 2.5rem;
+  }
+
+  .theme-doc-sidebar-container {
+    margin-right: 0 !important;
+  }
+
+  main.docMainContainer {
+    margin-left: 0 !important;
+  }
 }
 
 /* Enhanced button styles */
@@ -733,103 +1262,51 @@ html[data-theme='dark'] .sidebar {
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-/* Footer styling */
+/* Footer styling - Purple gradient theme */
 .footer {
-  background: var(--ifm-color-primary); /* Solid dark green background - consistent with hero */
-  color: white; /* White text - high contrast */
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 50%, #6d28d9 100%);
+  color: white;
   padding: 3rem 0 2rem;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #a78bfa, transparent);
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+}
+
+html[data-theme='dark'] .footer {
+  background: linear-gradient(135deg, #1a1625 0%, #2d1b4e 50%, #1a1625 100%);
 }
 
 .footer a {
   color: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s ease;
 }
 
 .footer a:hover {
-  color: white;
+  color: #c4b5fd;
+  transform: translateX(3px);
 }
 
 .footer__title {
   color: white;
-}
-
-/* Responsive breakpoints */
-@media (max-width: 996px) {
-  .navbar-sidebar--show {
-    background-color: var(--ifm-background-surface-color);
-  }
-
-  .sidebar {
-    border-right: none;
-  }
-
-  .docPage,
-  .main-wrapper {
-    padding-left: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar__toggle {
-    display: inline-block;
-  }
-
-  .main-wrapper .container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  .markdown h1 {
-    font-size: 2em;
-  }
-
-  .markdown h2 {
-    font-size: 1.7em;
-  }
-
-  .markdown h3 {
-    font-size: 1.5em;
-  }
-
-  /* Adjust sidebar for mobile */
-  .theme-doc-sidebar-container {
-    position: relative;
-    width: 100%;
-    min-width: 100%;
-  }
-}
-
-@media (max-width: 576px) {
-  .navbar__item {
-    display: none;
-  }
-
-  .navbar__logo {
-    margin-right: 0.5rem;
-  }
-
-  .main-wrapper .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  /* Mobile-friendly typography */
-  :root {
-    --ifm-font-size-base: 16px;
-  }
-
-  .markdown {
-    font-size: var(--ifm-font-size-base);
-  }
-
-  .markdown > * {
-    max-width: 100%;
-  }
+  font-weight: 700;
 }
 
 /* Gradient backgrounds */
 .gradient-bg {
   background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
 }
+
+/* ===== RESPONSIVE BREAKPOINTS - CONSOLIDATED ===== */
+/* Tablet and Desktop (997px+) handled by base styles */
 
 /* Enhanced responsive breakpoints for purple theme */
 @media (max-width: 996px) {
@@ -1083,71 +1560,121 @@ html[data-theme='dark'] .sidebar {
 .markdown table {
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(138, 43, 226, 0.1);
-  border: 1px solid var(--ifm-color-purple-tertiary);
+  box-shadow: 0 4px 6px rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  width: 100%;
 }
 
 .markdown table th {
-  background: #e8f5e9; /* Light green tint - Material Green 50 */
+  background: rgba(124, 58, 237, 0.12); /* Light purple tint */
   font-weight: 600;
-  color: #1b5e20; /* Dark green text - high contrast */
+  color: var(--ifm-color-purple-darkest); /* Dark purple text - high contrast */
   padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--ifm-color-purple-primary);
 }
 
 .markdown table td {
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--ifm-color-purple-tertiary);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+  color: var(--rb-text-body);
 }
 
 .markdown table tr:nth-child(even) {
-  background-color: rgba(138, 43, 226, 0.02);
+  background-color: rgba(124, 58, 237, 0.03);
+}
+
+.markdown table tr:hover {
+  background-color: rgba(124, 58, 237, 0.06);
+  transition: background-color 0.2s ease;
 }
 
 html[data-theme='dark'] .markdown table {
-  border-color: var(--ifm-color-purple-tertiary);
+  border-color: rgba(167, 139, 250, 0.2);
+  box-shadow: 0 4px 6px rgba(124, 58, 237, 0.2);
 }
 
 html[data-theme='dark'] .markdown table th {
-  background: rgba(102, 187, 106, 0.15); /* Light green tint for dark mode */
-  color: #81c784; /* Light green text - high contrast on dark background */
+  background: rgba(167, 139, 250, 0.15); /* Light purple tint for dark mode */
+  color: var(--ifm-color-purple-lightest); /* Light purple text - high contrast on dark background */
+  border-bottom-color: var(--ifm-color-purple-secondary);
+}
+
+html[data-theme='dark'] .markdown table td {
+  border-bottom-color: rgba(167, 139, 250, 0.1);
 }
 
 html[data-theme='dark'] .markdown table tr:nth-child(even) {
-  background-color: rgba(138, 43, 226, 0.05);
+  background-color: rgba(167, 139, 250, 0.05);
 }
 
-/* Custom styling for module-2 digital twin content */
+html[data-theme='dark'] .markdown table tr:hover {
+  background-color: rgba(167, 139, 250, 0.1);
+}
+
+/* Responsive table for mobile */
+@media (max-width: 768px) {
+  .markdown table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Custom styling for module-2 digital twin content - Purple themed */
 .markdown .module-2-intro {
-  background: linear-gradient(135deg, #4285f4 0%, #34a853 33%, #fbbc05 66%, #ea4335 100%);
+  background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
   padding: 2rem;
   border-radius: 12px;
   color: white;
   margin: 2rem 0;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+}
+
+html[data-theme='dark'] .markdown .module-2-intro {
+  background: linear-gradient(135deg, #2d1b4e 0%, #4c1d95 100%);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
 }
 
 .markdown .gazebo-section {
-  border-left: 4px solid #4285f4;
-  background-color: rgba(66, 133, 244, 0.05);
+  border-left: 4px solid var(--ifm-color-purple-primary);
+  background-color: rgba(124, 58, 237, 0.05);
   padding: 1.5rem;
   border-radius: 0 8px 8px 0;
   margin: 1.5rem 0;
+  color: var(--rb-text-body);
+}
+
+html[data-theme='dark'] .markdown .gazebo-section {
+  background-color: rgba(167, 139, 250, 0.08);
+  border-left-color: var(--ifm-color-purple-secondary);
 }
 
 .markdown .unity-section {
-  border-left: 4px solid #34a853;
-  background-color: rgba(52, 168, 83, 0.05);
+  border-left: 4px solid var(--ifm-color-purple-secondary);
+  background-color: rgba(139, 92, 246, 0.05);
   padding: 1.5rem;
   border-radius: 0 8px 8px 0;
   margin: 1.5rem 0;
+  color: var(--rb-text-body);
+}
+
+html[data-theme='dark'] .markdown .unity-section {
+  background-color: rgba(196, 181, 253, 0.08);
+  border-left-color: var(--ifm-color-purple-tertiary);
 }
 
 .markdown .sensor-section {
-  border-left: 4px solid #fbbc05;
-  background-color: rgba(251, 188, 5, 0.05);
+  border-left: 4px solid var(--ifm-color-purple-tertiary);
+  background-color: rgba(167, 139, 250, 0.05);
   padding: 1.5rem;
   border-radius: 0 8px 8px 0;
   margin: 1.5rem 0;
+  color: var(--rb-text-body);
+}
+
+html[data-theme='dark'] .markdown .sensor-section {
+  background-color: rgba(221, 214, 254, 0.08);
+  border-left-color: var(--ifm-color-purple-accent);
 }
 
 /* Typography enhancements */
@@ -1258,4 +1785,352 @@ html[data-theme='dark'] .markdown table tr:nth-child(even) {
 
 .markdown a:hover::after {
   transform: scaleX(1);
+}
+
+/* ===== BOOK PAGES - HIDE "EDIT THIS PAGE" LINK ===== */
+.theme-doc-footer-edit-meta-row,
+.theme-edit-this-page,
+a[class*='editThisPage'],
+.edit-page-link,
+.docItemCol_node_modules-\@docusaurus-theme-classic-lib-theme-DocItem-Layout-styles-module {
+  display: none !important;
+}
+
+/* Hide the entire footer edit section */
+.theme-doc-footer .theme-doc-footer-edit-meta-row {
+  display: none !important;
+}
+
+/* ===== NAVBAR IMPROVEMENTS (ENHANCED) ===== */
+
+/* Apply contrasting background color to navbar in light mode */
+.navbar {
+  background-color: var(--ifm-navbar-background-color) !important;
+  box-shadow: var(--ifm-navbar-shadow) !important;
+  border-bottom: none !important;
+  padding: 0.75rem 1.5rem !important;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+  margin-bottom: 0 !important;
+}
+
+/* CRITICAL: Remove ALL gap between navbar and banner - AGGRESSIVE FIX */
+.navbar + * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.main-wrapper {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+article {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.markdown {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Remove Docusaurus default spacing */
+div[class*='docMainContainer'] {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.container {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Target the specific wrapper */
+.main-wrapper > * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Dark mode navbar - dark purple background */
+html[data-theme='dark'] .navbar {
+  background-color: var(--ifm-navbar-background-color) !important;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.15);
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.25) !important;
+}
+
+/* CRITICAL: Hide ONLY hamburger menu on desktop (NOT color mode toggle) */
+@media (min-width: 997px) {
+  .navbar__toggle:not([class*='colorMode']) {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Ensure navbar items are visible on desktop */
+  .navbar__items {
+    display: flex !important;
+    gap: 0.5rem;
+  }
+
+  .navbar__item {
+    display: inline-flex !important;
+  }
+
+  .navbar__links {
+    display: flex !important;
+  }
+
+  /* ENSURE color mode toggle is visible on desktop */
+  button[class*='colorMode'] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Show hamburger menu only on mobile and tablet */
+@media (max-width: 996px) {
+  .navbar__toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+  }
+}
+
+/* Improve navbar link contrast and styling - Clean underline hover */
+.navbar__link {
+  color: var(--ifm-navbar-link-color) !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 0;
+  transition: all 0.3s ease !important;
+  position: relative;
+  background-color: transparent !important;
+}
+
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 2px;
+  background: var(--ifm-color-purple-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.navbar__link:hover {
+  color: var(--ifm-color-purple-primary) !important;
+  background-color: transparent !important;
+}
+
+.navbar__link:hover::after {
+  transform: scaleX(1);
+}
+
+html[data-theme='dark'] .navbar__link::after {
+  background: var(--ifm-color-purple-secondary);
+}
+
+html[data-theme='dark'] .navbar__link:hover {
+  color: var(--ifm-color-purple-secondary) !important;
+  background-color: transparent !important;
+}
+
+/* Navbar logo and title styling */
+.navbar__brand {
+  color: var(--ifm-navbar-link-color) !important;
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.navbar__brand:hover {
+  color: var(--ifm-navbar-link-hover-color) !important;
+  transform: translateX(2px);
+}
+
+/* Navbar logo image */
+.navbar__logo {
+  height: 36px;
+  width: auto;
+  margin-right: 0.75rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Theme toggle button - MINIMAL & CLEAN */
+button[class*='colorModeToggle'],
+button[class*='toggleButton'],
+button[class*='colorMode'],
+.navbar__toggle[class*='colorMode'] {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px !important;
+  padding: 0.4rem !important;
+  transition: all 0.2s ease !important;
+  background-color: transparent !important;
+  border: none !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  margin: 0 !important;
+}
+
+button[class*='colorModeToggle']:hover,
+button[class*='toggleButton']:hover,
+button[class*='colorMode']:hover {
+  background-color: rgba(167, 139, 250, 0.08) !important;
+}
+
+html[data-theme='dark'] button[class*='colorModeToggle']:hover,
+html[data-theme='dark'] button[class*='toggleButton']:hover,
+html[data-theme='dark'] button[class*='colorMode']:hover {
+  background-color: rgba(167, 139, 250, 0.12) !important;
+}
+
+/* Theme toggle icon - MINIMAL SIZE */
+button[class*='colorModeToggle'] svg,
+button[class*='toggleButton'] svg,
+button[class*='colorMode'] svg {
+  width: 18px !important;
+  height: 18px !important;
+  color: var(--ifm-navbar-link-color) !important;
+  fill: var(--ifm-navbar-link-color) !important;
+  transition: color 0.2s ease !important;
+}
+
+button[class*='colorModeToggle']:hover svg,
+button[class*='toggleButton']:hover svg,
+button[class*='colorMode']:hover svg {
+  color: #A78BFA !important;
+  fill: #A78BFA !important;
+}
+
+/* FORCE toggle button visibility on ALL screen sizes */
+.navbar__items--right button[class*='colorMode'] {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* DESKTOP - Ensure toggle is visible */
+@media (min-width: 997px) {
+  .navbar__items--right button[class*='colorMode'] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .navbar__items--right {
+    display: flex !important;
+    gap: 0.75rem !important;
+  }
+}
+
+@media (max-width: 996px) {
+  .navbar__items--right button[class*='colorMode'] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar__items--right button[class*='colorMode'] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar__items--right button[class*='colorMode'] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar__items--right button[class*='colorMode'] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Navbar right section alignment */
+.navbar__items--right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+/* Mobile navbar improvements - Logo left, Toggle right */
+@media (max-width: 996px) {
+  .navbar {
+    padding: 0.5rem 1rem !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Logo and title on the LEFT */
+  .navbar__brand {
+    flex: 0 0 auto;
+    order: 1;
+  }
+
+  /* Hide regular nav items on mobile */
+  .navbar__items:not(.navbar__items--right) {
+    display: none !important;
+  }
+
+  /* Toggle button on the RIGHT */
+  .navbar__items--right {
+    display: flex !important;
+    order: 3;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Hamburger menu button */
+  .navbar__toggle {
+    color: var(--ifm-navbar-link-color) !important;
+    background: none !important;
+    border: none !important;
+    padding: 0.5rem !important;
+    order: 2;
+  }
+
+  .navbar__toggle:hover {
+    background-color: transparent !important;
+  }
+
+  /* Ensure theme toggle is visible on mobile */
+  button[class*='colorModeToggle'],
+  button[class*='toggleButton'],
+  button[class*='colorMode'] {
+    display: inline-flex !important;
+    visibility: visible !important;
+  }
 }

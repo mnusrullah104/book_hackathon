@@ -35,10 +35,9 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          // Edit this page links point to your repository
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/mnusrullah104/BookWriting_Hackathon1/tree/main/frontend/',
         },
         blog: false, // Optional: disable the blog plugin
         theme: {
@@ -54,9 +53,9 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       colorMode: {
-        defaultMode: 'light',
+        defaultMode: 'dark',
         disableSwitch: false,
-        respectPrefersColorScheme: true,
+        respectPrefersColorScheme: false,
       },
       navbar: {
         title: 'AI-Native Robotics Book',
@@ -77,7 +76,7 @@ const config = {
             position: 'left',
           },
           {
-            href: 'https://github.com/mnusrullah104',
+            href: 'https://github.com/mnusrullah104/BookWriting_Hackathon1',
             label: 'GitHub',
             position: 'right',
           },
@@ -96,24 +95,28 @@ const config = {
             ],
           },
           {
-            title: 'Community',
+            title: 'Resources',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'About This Book',
+                to: '/about',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                label: 'ROS 2 Documentation',
+                href: 'https://docs.ros.org/en/rolling/',
               },
             ],
           },
           {
-            title: 'More',
+            title: 'Connect',
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                label: 'GitHub Repository',
+                href: 'https://github.com/mnusrullah104/BookWriting_Hackathon1',
+              },
+              {
+                label: 'Report Issues',
+                href: 'https://github.com/mnusrullah104/BookWriting_Hackathon1/issues',
               },
             ],
           },
