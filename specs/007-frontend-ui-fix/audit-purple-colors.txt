@@ -1,0 +1,10 @@
+./css/custom.css:43:  --ifm-color-primary: #8a2be2; /* Deep purple */
+./css/custom.css:44:  --ifm-color-primary-dark: #7a1ad2; /* Darker purple */
+./css/custom.css:45:  --ifm-color-primary-darker: #6a16c2; /* Even darker purple */
+./css/custom.css:47:  --ifm-color-primary-light: #9a46e8; /* Lighter purple */
+./css/custom.css:52:  --ifm-color-purple-primary: #8a2be2;
+./css/custom.css:112:  --ifm-color-primary: #9a46e8; /* Lighter purple */
+./css/custom.css:113:  --ifm-color-primary-dark: #8a2be2; /* Deep purple */
+./css/custom.css:114:  --ifm-color-primary-darker: #7a1ad2; /* Darker purple */
+./css/custom.css:115:  --ifm-color-primary-darkest: #6a16c2; /* Even darker purple */
+./css/custom.css:647:  background: linear-gradient(135deg, #8a2be2 0%, #6a16c2 100%); /* Purple gradient */

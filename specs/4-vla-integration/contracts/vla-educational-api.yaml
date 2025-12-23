@@ -1,0 +1,164 @@
+# OpenAPI Specification for Vision-Language-Action Educational Module
+# This represents how the educational content could be programmatically accessed
+
+openapi: 3.0.0
+info:
+  title: Vision-Language-Action Educational Module API
+  description: API for accessing educational content about VLA integration in robotics
+  version: 1.0.0
+
+paths:
+  /chapters:
+    get:
+      summary: List all available chapters
+      description: Returns a list of all chapters in the VLA module
+      responses:
+        '200':
+          description: List of chapters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+
+  /chapters/{chapterId}:
+    get:
+      summary: Get specific chapter content
+      description: Returns the content of a specific chapter
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [voice-to-action-pipelines, cognitive-planning-llms, capstone-autonomous-humanoid]
+          description: ID of the chapter to retrieve
+      responses:
+        '200':
+          description: Chapter content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChapterContent'
+
+  /concepts:
+    get:
+      summary: List all key concepts
+      description: Returns a list of all key concepts covered in the module
+      responses:
+        '200':
+          description: List of concepts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Concept'
+
+  /vla-system/components:
+    get:
+      summary: List VLA system components
+      description: Returns the components of the Vision-Language-Action system
+      responses:
+        '200':
+          description: List of VLA components
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VLAComponent'
+
+components:
+  schemas:
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the chapter
+        title:
+          type: string
+          description: Title of the chapter
+        description:
+          type: string
+          description: Brief description of the chapter
+        learningObjectives:
+          type: array
+          items:
+            type: string
+          description: List of learning objectives for the chapter
+        duration:
+          type: string
+          description: Estimated time to complete the chapter
+
+    ChapterContent:
+      type: object
+      properties:
+        chapter:
+          $ref: '#/components/schemas/Chapter'
+        content:
+          type: string
+          description: Markdown content of the chapter
+        keyTerms:
+          type: array
+          items:
+            type: string
+          description: Important terms defined in the chapter
+        examples:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              description:
+                type: string
+
+    Concept:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the concept
+        name:
+          type: string
+          description: Name of the concept
+        definition:
+          type: string
+          description: Definition of the concept
+        relatedChapters:
+          type: array
+          items:
+            type: string
+          description: Chapters where this concept is covered
+        examples:
+          type: array
+          items:
+            type: string
+          description: Examples of the concept in practice
+
+    VLAComponent:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the component
+        name:
+          type: string
+          description: Name of the VLA component
+        description:
+          type: string
+          description: Description of the component's role in VLA system
+        input:
+          type: string
+          description: Type of input the component processes
+        output:
+          type: string
+          description: Type of output the component produces
+        relatedConcepts:
+          type: array
+          items:
+            type: string
+          description: Related concepts covered in the module

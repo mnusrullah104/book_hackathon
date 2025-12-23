@@ -1,0 +1,66 @@
+# Component Interface Contract: Docusaurus UI/UX Upgrade
+
+## Custom Sidebar Component
+
+### Interface Definition
+```
+SidebarComponent(props: {
+  isExpanded: boolean,
+  activeItemId: string,
+  navigationData: NavigationStructure[],
+  onToggleExpand: (moduleId: string) => void,
+  onNavigate: (itemId: string) => void
+}): JSX.Element
+```
+
+### Expected Behaviors
+- Renders collapsible module sections with proper indentation
+- Shows active state for currently viewed content
+- Maintains expanded/collapsed state across page navigation
+- Responsive behavior on different screen sizes
+
+### Error Handling
+- Gracefully handles missing navigation data
+- Maintains accessibility with proper ARIA attributes
+
+## Theme Provider Component
+
+### Interface Definition
+```
+ThemeProvider(props: {
+  children: ReactNode,
+  initialTheme: 'light' | 'dark',
+  onThemeChange: (theme: 'light' | 'dark') => void
+}): JSX.Element
+```
+
+### Expected Behaviors
+- Provides theme context to all child components
+- Persists theme preference in localStorage
+- Applies CSS variables for active theme
+- Supports smooth theme transitions
+
+### Error Handling
+- Falls back to default theme if initial theme is invalid
+- Continues to function if localStorage is unavailable
+
+## Enhanced MDX Components
+
+### Interface Definition
+```
+CodeBlockComponent(props: {
+  children: string,
+  className?: string,
+  metastring?: string
+}): JSX.Element
+```
+
+### Expected Behaviors
+- Renders code with syntax highlighting
+- Supports copy-to-clipboard functionality
+- Responsive sizing for different screen widths
+- Proper contrast ratios for accessibility
+
+### Error Handling
+- Renders plain code if syntax highlighting fails
+- Handles invalid language specifications gracefully

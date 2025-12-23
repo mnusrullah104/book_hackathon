@@ -1,61 +1,48 @@
-<!--
-Sync Impact Report:
-- Version change: none → 1.0.0
-- Modified principles:
-  - PRINCIPLE_1_NAME → Spec-First Writing
-  - PRINCIPLE_2_NAME → Technical Accuracy and Consistency
-  - PRINCIPLE_3_NAME → Clear, Beginner-Friendly Explanations
-  - PRINCIPLE_4_NAME → Reproducible Generation and Deployment
-  - PRINCIPLE_5_NAME → Validation and Verification
-  - PRINCIPLE_6_NAME → Meaningful Commit History
-- Added sections:
-  - Constraints
-  - Success Criteria
-- Removed sections: None
-- Templates requiring updates:
-  - ✅ .specify/templates/plan-template.md
-  - ✅ .specify/templates/spec-template.md
-  - ✅ .specify/templates/tasks-template.md
-- Follow-up TODOs: None
+<!-- SYNC IMPACT REPORT:
+     Version change: 1.0.0 → 1.1.0
+     Modified principles: [PRINCIPLE_1_NAME] → Spec-first development, [PRINCIPLE_2_NAME] → Technical accuracy and reproducibility, [PRINCIPLE_3_NAME] → Clarity for developers, [PRINCIPLE_4_NAME] → AI-native architecture, [PRINCIPLE_5_NAME] → End-to-end transparency
+     Added sections: None
+     Removed sections: None
+     Templates requiring updates: .specify/templates/plan-template.md ⚠ pending, .specify/templates/spec-template.md ⚠ pending, .specify/templates/tasks-template.md ⚠ pending
+     Follow-up TODOs: None
 -->
-# AI/Spec-Driven Book Creation (Docusaurus + Spec-Kit Plus + Gemini CLI) Constitution
+
+# AI-Native Book with Embedded RAG Chatbot Constitution
 
 ## Core Principles
 
-### I. Spec-First Writing
-Spec-first writing aligned with Spec-Kit Plus. Every chapter must be mapped to a Spec-Kit Plus entry.
+### Spec-first development (NON-NEGOTIABLE)
+Every feature and implementation must begin with a formal specification; No code is written without a corresponding spec that defines goals, interfaces, and acceptance criteria; All development follows the Spec-Kit Plus methodology with traceable requirements.
 
-### II. Technical Accuracy and Consistency
-All content must be technically accurate and consistent across all pages. Use consistent MDX formatting and metadata.
+### Technical accuracy and reproducibility
+All code examples, configurations, and procedures must be technically accurate and fully reproducible; All implementations must work as documented with clear setup instructions; Free-tier compatible architecture required for accessibility.
 
-### III. Clear, Beginner-Friendly Explanations
-Provide clear, beginner-friendly explanations for all concepts.
+### Clarity for developers and AI engineers
+Documentation must be clear and accessible to both traditional developers and AI engineers; Code examples must be production-quality with appropriate explanations; Chapter progression must follow logical learning paths with practical applications.
 
-### IV. Reproducible Generation and Deployment
-The book's generation and deployment must be reproducible. Deploy to GitHub Pages using a repeatable and documented process.
+### AI-native architecture (agents, RAG, vector DBs)
+All system architecture must embrace AI-native patterns including agents, Retrieval-Augmented Generation (RAG), and vector databases; Systems must leverage modern AI infrastructure patterns with appropriate tooling; Architecture decisions must consider AI integration requirements from inception.
 
-### V. Validation and Verification
-Validate all specifications before content generation using `specifyplus validate`. Verify all CLI commands and workflows by testing them to ensure they are correct.
+### End-to-end transparency
+All processes must be transparent and traceable from specification to deployment; Build and deployment steps must be fully documented with reproducible environment variables; All system behaviors must be observable and auditable.
 
-### VI. Meaningful Commit History
-Commit all changes with meaningful, descriptive messages that explain the 'what' and 'why' of the change.
+### Modular, non-filler content
+Content must be modular and focused without unnecessary filler material; Each section must contribute meaningfully to the overall learning objectives; Production-quality code examples only, no placeholder or dummy implementations.
 
-## Constraints
+## Book Standards
 
-- The final book must contain a minimum of 12–15 pages.
-- The project requires full integration of Spec-Kit Plus, from `init` to `refine` to `generate`.
-- All content must be original and free of plagiarism.
-- All diagrams and illustrations must be either AI-generated or original creations.
+Format: Markdown/MDX via Docusaurus for clear documentation structure; Clear chapter progression with integrated code examples and diagrams; Developer-focused explanations that bridge conceptual understanding with practical implementation.
 
-## Success Criteria
+## RAG System Requirements
 
-- The entire book must be fully regenerable from its specifications.
-- The Docusaurus project must build without any errors.
-- The deployment to GitHub Pages must be successful, and the book must be publicly accessible.
-- The final content must be accurate, clear, and fully aligned with the approved specifications.
+Backend: FastAPI for reliable API services; AI: OpenAI Agents / ChatKit SDKs for intelligent interactions; Data: Neon Serverless Postgres + Qdrant Cloud (Free Tier) for scalable vector storage; Responses must be retrieval-grounded with no hallucinations, supporting both whole-book and user-selected text queries.
+
+## Deployment Standards
+
+GitHub Pages for public accessibility; Documented environment variables and build steps for reproducible setup; All deployment processes must be transparent and repeatable by readers.
 
 ## Governance
 
-This Constitution is the single source of truth for project principles and standards. It supersedes all other practices and guidelines. Amendments to this constitution require a documented proposal, review, and approval from the project lead. All project activities, including code contributions, reviews, and deployments, must comply with this constitution.
+Constitution supersedes all other development practices; All implementations must comply with specified architectural constraints; Amendments require formal documentation and approval process; All code reviews must verify compliance with these principles.
 
-**Version**: 1.0.0 | **Ratified**: 2025-12-07 | **Last Amended**: 2025-12-07
+**Version**: 1.1.0 | **Ratified**: 2025-01-01 | **Last Amended**: 2025-12-18

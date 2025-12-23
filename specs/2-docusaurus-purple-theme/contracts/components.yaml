@@ -1,0 +1,60 @@
+# Component Interface Contract: Docusaurus Purple Theme Upgrade
+
+## Homepage Component
+
+### Interface Definition
+```
+HomepageComponent(props: {
+  children: ReactNode
+}): JSX.Element
+```
+
+### Expected Behaviors
+- Renders attractive banner/hero section with strong heading and call-to-action
+- Uses purple-based theme consistently
+- Fully responsive across device sizes
+- Maintains book-like aesthetic
+
+### Error Handling
+- Gracefully handles missing content
+- Maintains accessibility with proper ARIA attributes
+
+## About Page Component
+
+### Interface Definition
+```
+AboutPageComponent(props: {
+  children: ReactNode
+}): JSX.Element
+```
+
+### Expected Behaviors
+- Displays information about book purpose, author background, and hackathon context
+- Uses consistent purple-based styling
+- Responsive layout for all screen sizes
+- Clear, well-structured content presentation
+
+### Error Handling
+- Gracefully handles missing content sections
+- Maintains site-wide theme consistency
+
+## Enhanced MDX Components
+
+### Interface Definition
+```
+CodeBlockComponent(props: {
+  children: string,
+  className?: string,
+  metastring?: string
+}): JSX.Element
+```
+
+### Expected Behaviors
+- Renders code with enhanced purple-based syntax highlighting
+- Responsive sizing for different screen widths
+- Proper contrast ratios for accessibility in purple theme
+- Copy-to-clipboard functionality (if implemented within constraints)
+
+### Error Handling
+- Renders plain code if syntax highlighting fails
+- Handles invalid language specifications gracefully

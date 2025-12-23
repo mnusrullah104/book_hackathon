@@ -1,0 +1,399 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Theme Variables Contract",
+  "description": "CSS custom property schema for Frontend UI Fix & Consistency feature. Defines all theme variables, their allowed values, and WCAG contrast requirements.",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "colorVariables": {
+      "type": "object",
+      "description": "Color-related CSS custom properties",
+      "properties": {
+        "lightMode": {
+          "type": "object",
+          "description": "Colors for light mode (:root selector)",
+          "properties": {
+            "backgrounds": {
+              "type": "object",
+              "properties": {
+                "--ifm-background-color": {
+                  "type": "string",
+                  "const": "#ffffff",
+                  "description": "Primary page background - pure white"
+                },
+                "--ifm-background-surface-color": {
+                  "type": "string",
+                  "const": "#ffffff",
+                  "description": "Surface/card background"
+                },
+                "--ifm-card-background-color": {
+                  "type": "string",
+                  "const": "#ffffff",
+                  "description": "Card component background"
+                },
+                "--rb-bg-code": {
+                  "type": "string",
+                  "const": "#f5f5f5",
+                  "description": "Code block background - slight gray for distinction"
+                }
+              },
+              "required": ["--ifm-background-color", "--ifm-background-surface-color", "--ifm-card-background-color", "--rb-bg-code"]
+            },
+            "text": {
+              "type": "object",
+              "properties": {
+                "--rb-text-body": {
+                  "type": "string",
+                  "const": "#1a1a1a",
+                  "description": "Body text - 16.1:1 contrast on white (WCAG AA compliant)"
+                },
+                "--rb-text-heading": {
+                  "type": "string",
+                  "const": "#2d2d2d",
+                  "description": "Heading text - 12.6:1 contrast on white (WCAG AA compliant)"
+                },
+                "--rb-text-muted": {
+                  "type": "string",
+                  "const": "#4a4a4a",
+                  "description": "Secondary/muted text - 8.8:1 contrast on white (WCAG AA compliant)"
+                },
+                "--rb-sidebar-text": {
+                  "type": "string",
+                  "const": "#333333",
+                  "description": "Sidebar navigation text"
+                }
+              },
+              "required": ["--rb-text-body", "--rb-text-heading", "--rb-text-muted", "--rb-sidebar-text"]
+            },
+            "accents": {
+              "type": "object",
+              "description": "Dark green accent colors (Material Design Green palette)",
+              "properties": {
+                "--ifm-color-primary": {
+                  "type": "string",
+                  "const": "#1b5e20",
+                  "description": "Primary accent - Material Green 900 - 9.7:1 contrast on white (WCAG AA compliant)"
+                },
+                "--ifm-color-primary-dark": {
+                  "type": "string",
+                  "const": "#145c1a",
+                  "description": "Darker shade of primary"
+                },
+                "--ifm-color-primary-darker": {
+                  "type": "string",
+                  "const": "#114d16",
+                  "description": "Even darker shade"
+                },
+                "--ifm-color-primary-darkest": {
+                  "type": "string",
+                  "const": "#0d3910",
+                  "description": "Darkest shade"
+                },
+                "--ifm-color-primary-light": {
+                  "type": "string",
+                  "const": "#388e3c",
+                  "description": "Lighter shade - Material Green 700 - used for hover states"
+                },
+                "--ifm-color-primary-lighter": {
+                  "type": "string",
+                  "const": "#4caf50",
+                  "description": "Even lighter - Material Green 500"
+                },
+                "--ifm-color-primary-lightest": {
+                  "type": "string",
+                  "const": "#66bb6a",
+                  "description": "Lightest shade - Material Green 400"
+                }
+              },
+              "required": ["--ifm-color-primary", "--ifm-color-primary-dark", "--ifm-color-primary-darker", "--ifm-color-primary-darkest", "--ifm-color-primary-light", "--ifm-color-primary-lighter", "--ifm-color-primary-lightest"]
+            }
+          },
+          "required": ["backgrounds", "text", "accents"]
+        },
+        "darkMode": {
+          "type": "object",
+          "description": "Colors for dark mode (html[data-theme='dark'] selector)",
+          "properties": {
+            "backgrounds": {
+              "type": "object",
+              "properties": {
+                "--ifm-background-color": {
+                  "type": "string",
+                  "const": "#0c0c0d",
+                  "description": "Primary page background - near black"
+                },
+                "--ifm-background-surface-color": {
+                  "type": "string",
+                  "const": "#1c1e21",
+                  "description": "Surface/card background - lighter than page background"
+                },
+                "--ifm-card-background-color": {
+                  "type": "string",
+                  "const": "#1c1e21",
+                  "description": "Card component background"
+                },
+                "--rb-bg-code": {
+                  "type": "string",
+                  "const": "#1e1e1e",
+                  "description": "Code block background"
+                }
+              },
+              "required": ["--ifm-background-color", "--ifm-background-surface-color", "--ifm-card-background-color", "--rb-bg-code"]
+            },
+            "text": {
+              "type": "object",
+              "properties": {
+                "--rb-text-body": {
+                  "type": "string",
+                  "const": "#e8e8e8",
+                  "description": "Body text - 14.5:1 contrast on #0c0c0d (WCAG AA compliant)"
+                },
+                "--rb-text-heading": {
+                  "type": "string",
+                  "const": "#f0f0f0",
+                  "description": "Heading text - 16.8:1 contrast on #0c0c0d (WCAG AA compliant)"
+                },
+                "--rb-text-muted": {
+                  "type": "string",
+                  "const": "#b0b0b0",
+                  "description": "Secondary/muted text - 9.2:1 contrast on #0c0c0d (WCAG AA compliant)"
+                },
+                "--rb-sidebar-text": {
+                  "type": "string",
+                  "const": "#d0d0d0",
+                  "description": "Sidebar navigation text"
+                }
+              },
+              "required": ["--rb-text-body", "--rb-text-heading", "--rb-text-muted", "--rb-sidebar-text"]
+            },
+            "accents": {
+              "type": "object",
+              "description": "Light green accent colors for dark backgrounds (Material Design Green palette)",
+              "properties": {
+                "--ifm-color-primary": {
+                  "type": "string",
+                  "const": "#66bb6a",
+                  "description": "Primary accent - Material Green 400 - 7.8:1 contrast on #0c0c0d (WCAG AA compliant)"
+                },
+                "--ifm-color-primary-dark": {
+                  "type": "string",
+                  "const": "#4caf50",
+                  "description": "Darker shade - Material Green 500"
+                },
+                "--ifm-color-primary-darker": {
+                  "type": "string",
+                  "const": "#388e3c",
+                  "description": "Even darker - Material Green 700"
+                },
+                "--ifm-color-primary-darkest": {
+                  "type": "string",
+                  "const": "#2e7d32",
+                  "description": "Darkest shade - Material Green 800"
+                },
+                "--ifm-color-primary-light": {
+                  "type": "string",
+                  "const": "#81c784",
+                  "description": "Lighter shade - Material Green 300 - used for hover states"
+                },
+                "--ifm-color-primary-lighter": {
+                  "type": "string",
+                  "const": "#a5d6a7",
+                  "description": "Even lighter - Material Green 200"
+                },
+                "--ifm-color-primary-lightest": {
+                  "type": "string",
+                  "const": "#c8e6c9",
+                  "description": "Lightest shade - Material Green 100"
+                }
+              },
+              "required": ["--ifm-color-primary", "--ifm-color-primary-dark", "--ifm-color-primary-darker", "--ifm-color-primary-darkest", "--ifm-color-primary-light", "--ifm-color-primary-lighter", "--ifm-color-primary-lightest"]
+            }
+          },
+          "required": ["backgrounds", "text", "accents"]
+        }
+      },
+      "required": ["lightMode", "darkMode"]
+    },
+    "typographyVariables": {
+      "type": "object",
+      "description": "Typography-related CSS custom properties",
+      "properties": {
+        "--ifm-font-size-base": {
+          "type": "string",
+          "pattern": "^(18|16)px$",
+          "description": "Base font size - 18px for desktop/tablet, 16px for mobile"
+        },
+        "--ifm-line-height-base": {
+          "type": "string",
+          "const": "1.6",
+          "description": "Body text line height for optimal readability"
+        },
+        "--ifm-heading-line-height": {
+          "type": "string",
+          "const": "1.3",
+          "description": "Heading line height for visual impact"
+        },
+        "--ifm-code-font-size": {
+          "type": "string",
+          "const": "95%",
+          "description": "Inline code size relative to base"
+        }
+      },
+      "required": ["--ifm-font-size-base", "--ifm-line-height-base", "--ifm-heading-line-height", "--ifm-code-font-size"]
+    },
+    "spacingVariables": {
+      "type": "object",
+      "description": "Spacing scale CSS custom properties",
+      "properties": {
+        "--ifm-spacing-xs": {
+          "type": "string",
+          "const": "0.5rem",
+          "description": "8px"
+        },
+        "--ifm-spacing-sm": {
+          "type": "string",
+          "const": "0.75rem",
+          "description": "12px"
+        },
+        "--ifm-spacing-md": {
+          "type": "string",
+          "const": "1rem",
+          "description": "16px"
+        },
+        "--ifm-spacing-lg": {
+          "type": "string",
+          "const": "1.5rem",
+          "description": "24px"
+        },
+        "--ifm-spacing-xl": {
+          "type": "string",
+          "const": "2rem",
+          "description": "32px"
+        },
+        "--ifm-spacing-2xl": {
+          "type": "string",
+          "const": "3rem",
+          "description": "48px"
+        },
+        "--ifm-spacing-3xl": {
+          "type": "string",
+          "const": "4rem",
+          "description": "64px"
+        }
+      },
+      "required": ["--ifm-spacing-xs", "--ifm-spacing-sm", "--ifm-spacing-md", "--ifm-spacing-lg", "--ifm-spacing-xl", "--ifm-spacing-2xl", "--ifm-spacing-3xl"]
+    },
+    "cardVariables": {
+      "type": "object",
+      "description": "Card styling CSS custom properties",
+      "properties": {
+        "--ifm-card-border-radius": {
+          "type": "string",
+          "const": "12px",
+          "description": "Rounded corners for cards"
+        },
+        "--ifm-card-shadow": {
+          "type": "object",
+          "properties": {
+            "lightMode": {
+              "type": "string",
+              "const": "0 10px 30px rgba(0,0,0,0.08)",
+              "description": "Card shadow in light mode"
+            },
+            "darkMode": {
+              "type": "string",
+              "const": "0 10px 30px rgba(0,0,0,0.25)",
+              "description": "Card shadow in dark mode"
+            }
+          },
+          "required": ["lightMode", "darkMode"]
+        }
+      },
+      "required": ["--ifm-card-border-radius", "--ifm-card-shadow"]
+    },
+    "layoutVariables": {
+      "type": "object",
+      "description": "Layout and container CSS custom properties",
+      "properties": {
+        "--ifm-container-width": {
+          "type": "string",
+          "const": "1200px",
+          "description": "Maximum content container width"
+        },
+        "--ifm-container-padding-horizontal": {
+          "type": "string",
+          "const": "2rem",
+          "description": "Horizontal padding for containers"
+        }
+      },
+      "required": ["--ifm-container-width", "--ifm-container-padding-horizontal"]
+    }
+  },
+  "required": ["colorVariables", "typographyVariables", "spacingVariables", "cardVariables", "layoutVariables"],
+  "definitions": {
+    "wcagContrastRequirements": {
+      "description": "WCAG 2.1 Level AA contrast ratio requirements",
+      "type": "object",
+      "properties": {
+        "normalText": {
+          "type": "number",
+          "minimum": 4.5,
+          "description": "Minimum contrast ratio for normal text (<18pt or <14pt bold)"
+        },
+        "largeText": {
+          "type": "number",
+          "minimum": 3.0,
+          "description": "Minimum contrast ratio for large text (≥18pt or ≥14pt bold)"
+        }
+      }
+    },
+    "breakpoints": {
+      "description": "Responsive breakpoint definitions",
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string",
+          "const": "< 768px",
+          "description": "Smartphones - 1 column card layout"
+        },
+        "tablet": {
+          "type": "string",
+          "const": "768px - 996px",
+          "description": "Tablets, small laptops - 2 column card layout"
+        },
+        "desktop": {
+          "type": "string",
+          "const": "≥ 1200px",
+          "description": "Desktops, large laptops - 3 column card layout"
+        }
+      }
+    },
+    "gradientRestrictions": {
+      "description": "Gradient usage restrictions",
+      "type": "object",
+      "properties": {
+        "prohibited": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "const": [
+            "Linear or radial gradients behind body text",
+            "Linear or radial gradients behind heading text",
+            "Linear or radial gradients in hero banner with overlaid text"
+          ]
+        },
+        "allowed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "const": [
+            "Solid color backgrounds only for text-containing elements",
+            "Gradients in purely decorative areas with no text (if any)"
+          ]
+        }
+      }
+    }
+  }
+}

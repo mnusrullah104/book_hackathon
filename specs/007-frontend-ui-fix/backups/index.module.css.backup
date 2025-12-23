@@ -1,0 +1,105 @@
+/**
+ * CSS files with a .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
+  color: white;
+  margin-bottom: 2rem;
+  border-radius: 0 0 var(--ifm-card-border-radius) var(--ifm-card-border-radius);
+  box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem 0;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  padding: 0 var(--ifm-container-padding-horizontal);
+}
+
+.card {
+  background: var(--ifm-background-color);
+  border-radius: var(--ifm-card-border-radius);
+  padding: 2rem;
+  box-shadow: var(--ifm-card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+html[data-theme='dark'] .card {
+  border: 1px solid var(--ifm-color-emphasis-700);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.cardIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-purple-primary);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--rb-text-heading); /* High-contrast heading */
+}
+
+html[data-theme='dark'] .cardTitle {
+  color: var(--rb-text-heading); /* High-contrast in dark mode */
+}
+
+.cardDescription {
+  color: var(--rb-text-body); /* High-contrast body text */
+  line-height: var(--ifm-line-height-base);
+  max-width: 75ch;
+  margin: 0 auto;
+}
+
+html[data-theme='dark'] .cardDescription {
+  color: var(--rb-text-body); /* High-contrast in dark mode */
+}
+
+.gradientText {
+  background: linear-gradient(135deg, #ffffff 0%, #e6f9f5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+}
+
+.featuresSection {
+  padding: 4rem 0;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+html[data-theme='dark'] .featuresSection {
+  background-color: var(--ifm-color-emphasis-900);
+}
