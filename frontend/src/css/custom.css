@@ -1342,28 +1342,7 @@ html[data-theme='dark'] .footer {
 }
 
 @media (max-width: 768px) {
-  .navbar__toggle {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  .navbar {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: flex !important;
-  }
-
-  .navbar__inner {
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  .main-wrapper .container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
+  /* Typography adjustments for tablets */
   .markdown h1 {
     font-size: 2em;
   }
@@ -1376,53 +1355,22 @@ html[data-theme='dark'] .footer {
     font-size: 1.5em;
   }
 
-  /* Adjust sidebar for mobile */
+  /* Sidebar adjustments for tablet */
   .theme-doc-sidebar-container {
     position: relative;
     width: 100%;
     min-width: 100%;
   }
 
-  /* Mobile-friendly navigation */
-  .navbar {
-    background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
-    padding: 0.5rem 1rem;
+  /* Content container adjustments */
+  .main-wrapper .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
 @media (max-width: 576px) {
-  .navbar {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: flex !important;
-    position: relative !important;
-  }
-
-  .navbar__inner {
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  .navbar__brand {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: flex !important;
-  }
-
-  .navbar__item {
-    display: none;
-  }
-
-  .navbar__logo {
-    margin-right: 0.5rem;
-  }
-
-  .main-wrapper .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  /* Mobile-friendly typography */
+  /* Typography adjustments for small mobile */
   :root {
     --ifm-font-size-base: 16px;
   }
@@ -1435,44 +1383,19 @@ html[data-theme='dark'] .footer {
     max-width: 100%;
   }
 
+  /* Content container adjustments */
+  .main-wrapper .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .navbar__logo {
+    margin-right: 0.5rem;
+  }
+
   /* Mobile navigation adjustments */
   .navbar__items--right > :last-child {
-    display: block !important; /* Show GitHub link on mobile */
-  }
-
-  /* Enhanced mobile sidebar navigation with purple theme */
-  .navbar-sidebar {
-    background: linear-gradient(135deg, var(--ifm-color-purple-gradient-start) 0%, var(--ifm-color-purple-gradient-end) 100%);
-  }
-
-  .navbar-sidebar__brand {
-    border-bottom: 1px solid var(--ifm-color-purple-tertiary);
-    padding: 1rem;
-  }
-
-  .navbar-sidebar__items {
-    background-color: var(--ifm-background-color);
-  }
-
-  .navbar-sidebar__item {
-    border-bottom: 1px solid var(--ifm-color-emphasis-200);
-  }
-
-  html[data-theme='dark'] .navbar-sidebar__item {
-    border-bottom: 1px solid var(--ifm-color-emphasis-700);
-  }
-
-  /* Mobile menu button styling */
-  .menu-expand-toggle {
-    color: var(--ifm-color-purple-primary) !important;
-  }
-
-  .menu__list-item-collapsible .menu__link--sublist {
-    background: rgba(138, 43, 226, 0.05);
-  }
-
-  html[data-theme='dark'] .menu__list-item-collapsible .menu__link--sublist {
-    background: rgba(138, 43, 226, 0.15);
+    display: block !important;
   }
 }
 
@@ -1842,115 +1765,137 @@ a[class*='editThisPage'],
   display: none !important;
 }
 
-/* ===== NAVBAR IMPROVEMENTS (ENHANCED) ===== */
+/* ===== NAVBAR IMPROVEMENTS (COMPLETE FIX) ===== */
+/**
+ * WHY NAVBAR WAS HIDDEN ON MOBILE/TABLET:
+ * 1. Docusaurus default styles hide the navbar toggle on all screen sizes
+ * 2. The navbar was using position: relative instead of sticky on mobile
+ * 3. Multiple display:none rules were hiding navbar elements
+ * 4. No proper mobile menu container was defined
+ *
+ * WHAT WAS FIXED:
+ * 1. Always visible navbar with sticky positioning on all devices
+ * 2. Hamburger menu toggle appears on mobile/tablet (<996px)
+ * 3. Navbar items visible on desktop (>=996px)
+ * 4. Proper z-index and overflow handling
+ */
 
-/* Apply contrasting background color to navbar in light mode */
+/* ============================================
+   BASE NAVBAR STYLES - Mobile First
+   ============================================ */
+
+/* Apply contrasting background color to navbar - ALWAYS VISIBLE */
 .navbar {
   background-color: var(--ifm-navbar-background-color) !important;
   box-shadow: var(--ifm-navbar-shadow) !important;
   border-bottom: none !important;
   padding: 0.75rem 1.5rem !important;
-  position: sticky;
-  top: 0;
-  z-index: 2000;
+
+  /* CRITICAL: Sticky positioning to keep navbar at top */
+  position: sticky !important;
+  position: -webkit-sticky !important;
+  top: 0 !important;
+
+  /* Ensure visibility */
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: flex !important;
+  z-index: 10000 !important;
+
+  /* Dimensions */
+  min-height: 60px !important;
+  height: auto !important;
+  max-height: none !important;
+
+  /* Overflow handling - visible for sticky to work */
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+
+  /* Transition for smooth interactions */
   transition: all 0.3s ease;
-  margin-bottom: 0 !important;
+}
+
+/* Navbar inner container */
+.navbar__inner {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+}
+
+/* Navbar container (wrapper) */
+.navbar__container {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-/* CRITICAL: Remove ALL gap between navbar and banner - AGGRESSIVE FIX */
-.navbar + * {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+/* Navbar items - right section */
+.navbar__items {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-.main-wrapper {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
+.navbar__items--right {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-main {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
+/* Navbar brand (logo + title) - ALWAYS VISIBLE */
+.navbar__brand {
+  display: flex !important;
+  align-items: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: var(--ifm-navbar-link-color) !important;
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  transition: all 0.3s ease !important;
 }
 
-article {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
+.navbar__brand:hover {
+  color: var(--ifm-navbar-link-hover-color) !important;
+  transform: translateX(2px);
 }
 
-.markdown {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+/* Navbar logo image */
+.navbar__logo {
+  height: 36px !important;
+  width: auto !important;
+  margin-right: 0.75rem !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-/* Remove Docusaurus default spacing */
-div[class*='docMainContainer'] {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
+/* Navbar link items - VISIBLE on all screens */
+.navbar__item {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: var(--ifm-navbar-link-color) !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  padding: 0.5rem 0.75rem !important;
+  transition: all 0.3s ease !important;
 }
 
-.container {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-}
-
-/* Target the specific wrapper */
-.main-wrapper > * {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* Dark mode navbar - dark purple background */
-html[data-theme='dark'] .navbar {
-  background-color: var(--ifm-navbar-background-color) !important;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.15);
-  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.25) !important;
-}
-
-/* CRITICAL: Hide ONLY hamburger menu on desktop (NOT color mode toggle) */
-@media (min-width: 997px) {
-  /* Hide hamburger menu on desktop - it triggers the mobile sidebar */
-  .navbar__toggle {
-    display: none !important;
-    visibility: hidden !important;
-  }
-
-  /* Ensure navbar items are visible on desktop */
-  .navbar__items {
-    display: flex !important;
-    gap: 0.5rem;
-  }
-
-  .navbar__item {
-    display: inline-flex !important;
-  }
-
-  .navbar__link {
-    display: inline-flex !important;
-  }
-
-  /* ENSURE color mode toggle is visible on desktop */
-  button[class*='colorModeToggle'],
-  button[class*='toggleButton'],
-  button[class*='colorMode'] {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
-
-/* Show hamburger menu only on mobile and tablet */
-@media (max-width: 996px) {
-  .navbar__toggle {
-    display: inline-flex !important;
-    visibility: visible !important;
-  }
-}
-
-/* Improve navbar link contrast and styling - Clean underline hover */
 .navbar__link {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   color: var(--ifm-navbar-link-color) !important;
   font-weight: 600 !important;
   font-size: 1rem !important;
@@ -1958,6 +1903,11 @@ html[data-theme='dark'] .navbar {
   border-radius: 0;
   transition: all 0.3s ease !important;
   position: relative;
+  background-color: transparent !important;
+}
+
+.navbar__link:hover {
+  color: var(--ifm-color-purple-primary) !important;
   background-color: transparent !important;
 }
 
@@ -1973,11 +1923,6 @@ html[data-theme='dark'] .navbar {
   transition: transform 0.3s ease;
 }
 
-.navbar__link:hover {
-  color: var(--ifm-color-purple-primary) !important;
-  background-color: transparent !important;
-}
-
 .navbar__link:hover::after {
   transform: scaleX(1);
 }
@@ -1988,31 +1933,42 @@ html[data-theme='dark'] .navbar__link::after {
 
 html[data-theme='dark'] .navbar__link:hover {
   color: var(--ifm-color-purple-secondary) !important;
-  background-color: transparent !important;
 }
 
-/* Navbar logo and title styling */
-.navbar__brand {
+/* ============================================
+   HAMBURGER MENU TOGGLE - Mobile/Tablet Only
+   ============================================ */
+
+/* Hamburger menu button - VISIBLE on mobile/tablet (<996px) */
+.navbar__toggle {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   color: var(--ifm-navbar-link-color) !important;
-  font-weight: 700 !important;
-  font-size: 1.25rem !important;
-  transition: all 0.3s ease !important;
+  background: none !important;
+  border: none !important;
+  padding: 0.5rem !important;
+  cursor: pointer;
+  transition: all 0.2s ease !important;
 }
 
-.navbar__brand:hover {
-  color: var(--ifm-navbar-link-hover-color) !important;
-  transform: translateX(2px);
+.navbar__toggle:hover {
+  background-color: transparent !important;
+  color: var(--ifm-color-purple-primary) !important;
 }
 
-/* Navbar logo image */
-.navbar__logo {
-  height: 36px;
-  width: auto;
-  margin-right: 0.75rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+/* Hamburger menu SVG icon styling */
+.navbar__toggle svg {
+  width: 24px !important;
+  height: 24px !important;
+  color: currentColor !important;
+  fill: currentColor !important;
 }
 
-/* Theme toggle button - MINIMAL & CLEAN */
+/* ============================================
+   THEME TOGGLE BUTTON - Always Visible
+   ============================================ */
+
 button[class*='colorModeToggle'],
 button[class*='toggleButton'],
 button[class*='colorMode'],
@@ -2023,35 +1979,35 @@ button[class*='colorMode'],
   align-items: center !important;
   justify-content: center !important;
   border-radius: 4px !important;
-  padding: 0.4rem !important;
+  padding: 0.5rem !important;
   transition: all 0.2s ease !important;
   background-color: transparent !important;
   border: none !important;
-  width: auto !important;
-  height: auto !important;
-  min-width: 36px !important;
-  min-height: 36px !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
   margin: 0 !important;
+  cursor: pointer;
 }
 
 button[class*='colorModeToggle']:hover,
 button[class*='toggleButton']:hover,
 button[class*='colorMode']:hover {
-  background-color: rgba(167, 139, 250, 0.08) !important;
+  background-color: rgba(167, 139, 250, 0.1) !important;
 }
 
 html[data-theme='dark'] button[class*='colorModeToggle']:hover,
 html[data-theme='dark'] button[class*='toggleButton']:hover,
 html[data-theme='dark'] button[class*='colorMode']:hover {
-  background-color: rgba(167, 139, 250, 0.12) !important;
+  background-color: rgba(167, 139, 250, 0.15) !important;
 }
 
-/* Theme toggle icon - MINIMAL SIZE */
 button[class*='colorModeToggle'] svg,
 button[class*='toggleButton'] svg,
 button[class*='colorMode'] svg {
-  width: 18px !important;
-  height: 18px !important;
+  width: 20px !important;
+  height: 20px !important;
   color: var(--ifm-navbar-link-color) !important;
   fill: var(--ifm-navbar-link-color) !important;
   transition: color 0.2s ease !important;
@@ -2060,154 +2016,181 @@ button[class*='colorMode'] svg {
 button[class*='colorModeToggle']:hover svg,
 button[class*='toggleButton']:hover svg,
 button[class*='colorMode']:hover svg {
-  color: #A78BFA !important;
-  fill: #A78BFA !important;
+  color: var(--ifm-color-purple-primary) !important;
+  fill: var(--ifm-color-purple-primary) !important;
 }
 
-/* FORCE toggle button visibility on ALL screen sizes */
-.navbar__items--right button[class*='colorMode'] {
-  display: inline-flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
+/* ============================================
+   MEDIA QUERIES - Desktop vs Mobile/Tablet
+   ============================================ */
 
-/* DESKTOP - Ensure toggle is visible */
+/* DESKTOP - >= 997px */
+/* Navbar fully visible with all items */
 @media (min-width: 997px) {
-  .navbar__items--right button[class*='colorMode'] {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+  .navbar {
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    top: 0 !important;
   }
 
-  .navbar__items--right {
+  /* Hide hamburger menu on desktop */
+  .navbar__toggle:not([class*='colorMode']) {
+    display: none !important;
+  }
+
+  /* All navbar items visible */
+  .navbar__items {
     display: flex !important;
-    gap: 0.75rem !important;
   }
-}
 
-@media (max-width: 996px) {
-  .navbar__items--right button[class*='colorMode'] {
+  .navbar__item {
     display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
   }
-}
 
-@media (max-width: 768px) {
-  .navbar__items--right button[class*='colorMode'] {
+  .navbar__link {
     display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
   }
 }
 
-@media (max-width: 576px) {
-  .navbar__items--right button[class*='colorMode'] {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar__items--right button[class*='colorMode'] {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
-
-/* Navbar right section alignment */
-.navbar__items--right {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-}
-
-/* Mobile navbar improvements - Logo left, Toggle right */
+/* TABLET - 768px to 996px */
+/* Hamburger menu appears, navbar items hide */
 @media (max-width: 996px) {
   .navbar {
     padding: 0.5rem 1rem !important;
-    display: flex !important;
-    justify-content: space-between;
-    align-items: center;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: relative !important;
-    height: auto !important;
-    min-height: 56px !important;
-    overflow: visible !important;
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    top: 0 !important;
   }
 
-  .navbar__inner {
-    display: flex !important;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  /* Logo and title on the LEFT */
-  .navbar__brand {
-    flex: 0 0 auto;
-    order: 1;
-    display: flex !important;
-    align-items: center;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  /* Hide regular nav items on mobile (they go in hamburger menu) */
+  /* Hide regular navbar items on tablet (use hamburger menu) */
   .navbar__items:not(.navbar__items--right) {
     display: none !important;
   }
 
-  /* Toggle button on the RIGHT */
+  /* Right section (toggle + theme) still visible */
   .navbar__items--right {
     display: flex !important;
-    order: 3;
+    flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    visibility: visible !important;
-    opacity: 1 !important;
   }
 
-  /* Hamburger menu button */
+  /* Hamburger menu button visible */
   .navbar__toggle {
     display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    color: var(--ifm-navbar-link-color) !important;
-    background: none !important;
-    border: none !important;
-    padding: 0.5rem !important;
-    order: 2;
+  }
+}
+
+/* MOBILE - < 768px */
+@media (max-width: 767px) {
+  .navbar {
+    padding: 0.5rem 0.75rem !important;
+    min-height: 56px !important;
   }
 
-  .navbar__toggle:hover {
-    background-color: transparent !important;
+  .navbar__logo {
+    height: 28px !important;
   }
 
-  /* Ensure theme toggle is visible on mobile */
-  button[class*='colorModeToggle'],
-  button[class*='toggleButton'],
-  button[class*='colorMode'] {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+  .navbar__brand {
+    font-size: 1.1rem !important;
   }
 
-  /* Ensure navbar sidebar is properly visible when opened */
-  .navbar-sidebar {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+  .navbar__toggle {
+    padding: 0.4rem !important;
   }
 
-  .navbar-sidebar--show {
-    transform: translateX(0) !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+  .navbar__toggle svg {
+    width: 22px !important;
+    height: 22px !important;
   }
+}
+
+/* ============================================
+   DARK MODE NAVBAR
+   ============================================ */
+
+html[data-theme='dark'] .navbar {
+  background-color: var(--ifm-navbar-background-color) !important;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.15);
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.25) !important;
+}
+
+html[data-theme='dark'] .navbar__brand,
+html[data-theme='dark'] .navbar__item,
+html[data-theme='dark'] .navbar__link {
+  color: var(--ifm-navbar-link-color) !important;
+}
+
+/* ============================================
+   MOBILE SIDEBAR (Hamburger Menu) - Docusaurus handles this
+   ============================================ */
+
+/* Ensure navbar sidebar is properly styled when opened */
+.navbar-sidebar {
+  background: var(--ifm-background-color) !important;
+}
+
+.navbar-sidebar__backdrop {
+  background: rgba(0, 0, 0, 0.5) !important;
+  z-index: 9999 !important;
+}
+
+.navbar-sidebar__brand {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.navbar-sidebar__items {
+  padding: 0.5rem;
+}
+
+.navbar-sidebar__item {
+  padding: 0.5rem 1rem;
+}
+
+/* Mobile sidebar navbar links */
+.navbar-sidebar .navbar__link {
+  display: block !important;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+.navbar-sidebar .navbar__link:hover {
+  background: rgba(109, 40, 217, 0.1);
+}
+
+/* ============================================
+   REMOVE EXTRA SPACING (Fix gap between navbar and content)
+   ============================================ */
+
+/* Remove gap between navbar and following content */
+.navbar + * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.main-wrapper {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+div[class*='docMainContainer'] {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.container {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
