@@ -5,11 +5,13 @@
   min-height: 100vh;
 }
 
-/* Hero Section - Like Homepage Banner */
+/* Hero Section - Like Homepage Banner - FIXED for responsiveness */
 .aboutHero {
   position: relative;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  width: 100%;
+  max-width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
   padding: 4rem 2rem 3.5rem;
   background: #12081F;
   text-align: center;
@@ -185,6 +187,7 @@ html[data-theme='dark'] .ctaSubtitle {
   display: flex;
   justify-content: center;
   gap: 1.25rem;
+  flex-wrap: wrap;
 }
 
 .ctaButton {
@@ -240,8 +243,63 @@ html[data-theme='dark'] .ctaSubtitle {
     font-size: 1.75rem;
   }
 
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
   .ctaButton {
+    width: 100%;
+    max-width: 280px;
     padding: 0.7rem 1.5rem;
     font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutHero {
+    padding: 2.5rem 1rem 2rem;
+  }
+
+  .aboutBadge {
+    font-size: 0.7rem;
+    padding: 0.35rem 1rem;
+  }
+
+  .aboutTitle {
+    font-size: 1.75rem;
+  }
+
+  .aboutSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .aboutContent {
+    padding: 2.5rem 1rem;
+  }
+
+  .featureCard {
+    padding: 1.5rem;
+  }
+
+  .featureIcon {
+    font-size: 2rem;
+  }
+
+  .featureTitle {
+    font-size: 1.1rem;
+  }
+
+  .ctaSection {
+    padding: 2rem 1.5rem;
+  }
+
+  .ctaTitle {
+    font-size: 1.5rem;
+  }
+
+  .ctaSubtitle {
+    font-size: 1rem;
   }
 }

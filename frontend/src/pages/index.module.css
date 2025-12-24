@@ -1,13 +1,16 @@
 /**
  * Premium Attractive Homepage - Purple Theme
  * Ultra-modern, engaging, professional design
+ * Mobile-first responsive design
  */
 
 /* ===== CLEAN PROFESSIONAL PURPLE HERO BANNER ===== */
 .heroBanner {
   position: relative;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  width: 100%;
+  max-width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   padding-top: 0 !important;
@@ -76,8 +79,9 @@
   line-height: 1.1;
   margin: 0 0 1.25rem 0;
   letter-spacing: -0.02em;
-  white-space: nowrap;
   color: #F5F3FF;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* CLEAN SUBHEADING - TWO LINES */
@@ -159,6 +163,10 @@
 
 /* ===== CLEAN PURPLE CARDS SECTION ===== */
 .cardsSection {
+  width: 100%;
+  max-width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
   padding: 5rem 2rem 4rem;
   margin-top: 6rem;
   background: #FAF9FF;
@@ -283,6 +291,10 @@ html[data-theme='dark'] .cardLink:hover {
   color: white;
   padding: 4rem 0 0;
   position: relative;
+  width: 100%;
+  max-width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 .footer::before {
@@ -299,7 +311,7 @@ html[data-theme='dark'] .cardLink:hover {
 .footerContent {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 3rem 3rem;
+  padding: 0 2rem 3rem;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 4rem;
@@ -339,7 +351,7 @@ html[data-theme='dark'] .cardLink:hover {
 
 .footerBottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem 3rem;
+  padding: 2rem 1.5rem;
   text-align: center;
   background: rgba(0, 0, 0, 0.2);
 }
@@ -502,8 +514,8 @@ html[data-theme='dark'] .cardLink:hover {
 
   .footerContent {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding: 0 2rem 2rem;
+    gap: 2rem;
+    padding: 0 1.5rem 2rem;
   }
 
   .footerBottom {
