@@ -2056,13 +2056,26 @@ html[data-theme='dark'] .navbar__link:hover {
  * THE FIX:
  * Force display:flex on theme toggle for all screen sizes
  * Position it in navbar__items--right section
+ * Target Docusaurus's actual theme toggle button classes
  */
 
+/* Target Docusaurus theme toggle button - various class combinations */
 button[class*='colorModeToggle'],
 button[class*='toggleButton'],
 button[class*='colorMode'],
+[class*='colorModeToggle'],
+[class*='toggleButton'],
+[class*='colorMode'],
 .navbar__toggle[class*='colorMode'],
-.navbar__item[class*='colorMode'] {
+.navbar__item[class*='colorMode'],
+.navbar__link[class*='colorMode'],
+/* Docusaurus 3.x theme toggle classes */
+.theme-toggle-button,
+.clean-mode-toggle,
+/* Fallback for any button in navbar right that toggles theme */
+.navbar__items--right button[aria-label*='theme'],
+.navbar__items--right button[aria-label*='dark'],
+.navbar__items--right button[aria-label*='light'] {
   display: inline-flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -2096,7 +2109,12 @@ html[data-theme='dark'] button[class*='colorMode']:hover {
 
 button[class*='colorModeToggle'] svg,
 button[class*='toggleButton'] svg,
-button[class*='colorMode'] svg {
+button[class*='colorMode'] svg,
+[class*='colorModeToggle'] svg,
+[class*='toggleButton'] svg,
+[class*='colorMode'] svg,
+.theme-toggle-button svg,
+.clean-mode-toggle svg {
   width: 20px !important;
   height: 20px !important;
   color: var(--ifm-navbar-link-color) !important;
@@ -2106,7 +2124,24 @@ button[class*='colorMode'] svg {
 
 button[class*='colorModeToggle']:hover svg,
 button[class*='toggleButton']:hover svg,
-button[class*='colorMode']:hover svg {
+button[class*='colorMode']:hover svg,
+[class*='colorModeToggle']:hover svg,
+[class*='toggleButton']:hover svg,
+[class*='colorMode']:hover svg,
+.theme-toggle-button:hover svg,
+.clean-mode-toggle:hover svg {
+  color: var(--ifm-color-purple-primary) !important;
+  fill: var(--ifm-color-purple-primary) !important;
+}
+
+/* Moon and Sun icons specific styling */
+.navbar svg[role='img'][aria-label='switch between dark and light mode'],
+.navbar [class*='colorMode'] svg {
+  color: var(--ifm-navbar-link-color) !important;
+  fill: var(--ifm-navbar-link-color) !important;
+}
+
+.navbar [class*='colorMode']:hover svg {
   color: var(--ifm-color-purple-primary) !important;
   fill: var(--ifm-color-purple-primary) !important;
 }
@@ -2199,9 +2234,12 @@ button[class*='colorMode']:hover svg {
 }
 
 /* MOBILE - < 768px
+ * MOBILE NAVBAR LAYOUT:
+ * LEFT SIDE: Logo + Brand text
+ * RIGHT SIDE: Theme toggle + Hamburger menu
+ *
  * WHY: On mobile, space is very limited
  * WHAT: Compact layout with only essentials
- * LAYOUT: Brand on left, Theme toggle + Hamburger on right
  */
 @media (max-width: 767px) {
   .navbar {
@@ -2209,24 +2247,72 @@ button[class*='colorMode']:hover svg {
     min-height: 56px !important;
   }
 
-  .navbar__logo {
-    height: 28px !important;
-    margin-right: 0.5rem !important;
+  /* Force navbar brand (logo + text) to the LEFT */
+  .navbar__brand {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    order: 1 !important;
+    flex: 0 0 auto !important;
+    font-size: 1rem !important;
+    margin-right: auto !important;
   }
 
-  .navbar__brand {
-    font-size: 1rem !important;
-    flex-shrink: 1 !important;
+  .navbar__logo {
+    height: 28px !important;
+    width: auto !important;
+    margin-right: 0.5rem !important;
+    flex-shrink: 0 !important;
   }
 
   .navbar__title {
+    display: inline-block !important;
     max-width: 120px !important;
     font-size: 0.95rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    flex-shrink: 1 !important;
   }
 
-  .navbar__toggle {
+  /* Right section container - push to right side */
+  .navbar__items--right {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.25rem !important;
+    order: 2 !important;
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+  }
+
+  /* Theme toggle button - BEFORE hamburger on mobile */
+  .navbar__items--right [class*='colorModeToggle'],
+  .navbar__items--right [class*='colorMode'],
+  .navbar__items--right .theme-toggle-button,
+  .clean-mode-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    order: 1 !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
     padding: 0.4rem !important;
-    order: 3 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Hamburger menu button - AFTER theme toggle on mobile */
+  .navbar__toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    order: 2 !important;
+    padding: 0.4rem !important;
+    margin-left: 0.25rem !important;
   }
 
   .navbar__toggle svg {
@@ -2234,26 +2320,19 @@ button[class*='colorMode']:hover svg {
     height: 22px !important;
   }
 
-  /* Theme toggle on mobile */
-  .navbar__items--right [class*='colorMode'] {
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
-    min-height: 36px !important;
-    padding: 0.4rem !important;
-    order: 2 !important;
-  }
-
-  /* GitHub icon on mobile */
+  /* GitHub icon on mobile - hide to save space */
   .navbar__items--right .navbar__item--github,
   .navbar__items--right a[href*='github'] {
     display: none !important;
-    /* Hide GitHub on small mobile to save space */
   }
 }
 
 /* EXTRA SMALL MOBILE - < 400px */
 @media (max-width: 400px) {
+  .navbar {
+    padding: 0.5rem 0.5rem !important;
+  }
+
   .navbar__title {
     max-width: 80px !important;
     font-size: 0.9rem !important;
@@ -2261,6 +2340,18 @@ button[class*='colorMode']:hover svg {
 
   .navbar__logo {
     height: 24px !important;
+    margin-right: 0.35rem !important;
+  }
+
+  .navbar__items--right [class*='colorModeToggle'],
+  .navbar__items--right [class*='colorMode'],
+  .navbar__items--right .theme-toggle-button,
+  .clean-mode-toggle {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    padding: 0.35rem !important;
   }
 }
 
