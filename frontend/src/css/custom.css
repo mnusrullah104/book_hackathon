@@ -1873,6 +1873,27 @@ a[class*='editThisPage'],
   opacity: 1 !important;
 }
 
+/* Ensure ALL children of navbar__items--right are visible */
+.navbar__items--right > * {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* CRITICAL: Force hamburger menu and logo to be visible */
+.navbar__brand,
+.navbar__logo,
+.navbar__title,
+button[aria-label="Toggle navigation bar"],
+button[aria-label*="navigation"],
+button[aria-label*="menu"],
+[class*="mobileSidebarToggle"],
+[class*="MobileSidebarToggle"] {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 /* Navbar brand (logo + title) - ALWAYS VISIBLE ON ALL SCREENS
  * WHY BRAND WAS HIDDEN:
  * Previous CSS might have had display:none or visibility:hidden on mobile
@@ -2005,7 +2026,9 @@ html[data-theme='dark'] .navbar__link:hover {
  * THE FIX:
  * Force display:flex on toggle for mobile/tablet screens
  */
-.navbar__toggle {
+.navbar__toggle,
+button[class*='toggle'][aria-label*='menu'],
+button[class*='toggle'][aria-label*='navigation'] {
   display: inline-flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -2016,9 +2039,13 @@ html[data-theme='dark'] .navbar__link:hover {
   cursor: pointer;
   transition: all 0.2s ease !important;
   order: 3 !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-.navbar__toggle:hover {
+.navbar__toggle:hover,
+button[class*='toggle'][aria-label*='menu']:hover,
+button[class*='toggle'][aria-label*='navigation']:hover {
   background-color: transparent !important;
   color: var(--ifm-color-purple-primary) !important;
 }
@@ -2162,7 +2189,7 @@ button[class*='colorMode']:hover svg,
   }
 
   /* Hide hamburger menu on desktop - navigation links are visible */
-  .navbar__toggle:not([class*='colorMode']) {
+  .navbar__toggle:not([class*='colorMode']):not(.theme-toggle-button) {
     display: none !important;
   }
 
@@ -2177,6 +2204,15 @@ button[class*='colorMode']:hover svg,
 
   .navbar__link {
     display: inline-flex !important;
+  }
+
+  /* Ensure theme toggle is always visible on desktop */
+  button[class*='colorModeToggle'],
+  button[class*='colorMode'],
+  .theme-toggle-button {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
 
@@ -2208,15 +2244,21 @@ button[class*='colorMode']:hover svg,
   }
 
   /* Hamburger menu button visible on tablet */
-  .navbar__toggle {
+  .navbar__toggle:not([class*='colorMode']):not(.theme-toggle-button) {
     display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     order: 3 !important;
   }
 
-  /* Theme toggle visible on tablet */
-  .navbar__items--right [class*='colorMode'] {
+  /* Theme toggle visible on tablet - CRITICAL */
+  .navbar__items--right [class*='colorMode'],
+  .navbar__items--right button[class*='colorModeToggle'],
+  .navbar__items--right button[class*='toggleButton'],
+  .navbar__items--right .theme-toggle-button,
+  button[class*='colorModeToggle'],
+  button[class*='colorMode'],
+  .theme-toggle-button {
     display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -2287,10 +2329,15 @@ button[class*='colorMode']:hover svg,
     margin-left: auto !important;
   }
 
-  /* Theme toggle button - BEFORE hamburger on mobile */
+  /* Theme toggle button - BEFORE hamburger on mobile - MUST BE VISIBLE */
   .navbar__items--right [class*='colorModeToggle'],
   .navbar__items--right [class*='colorMode'],
+  .navbar__items--right button[class*='colorModeToggle'],
+  .navbar__items--right button[class*='toggleButton'],
   .navbar__items--right .theme-toggle-button,
+  button[class*='colorModeToggle'],
+  button[class*='colorMode'],
+  .theme-toggle-button,
   .clean-mode-toggle {
     display: inline-flex !important;
     visibility: visible !important;
@@ -2303,16 +2350,18 @@ button[class*='colorMode']:hover svg,
     padding: 0.4rem !important;
     align-items: center !important;
     justify-content: center !important;
+    flex-shrink: 0 !important;
   }
 
   /* Hamburger menu button - AFTER theme toggle on mobile */
-  .navbar__toggle {
+  .navbar__toggle:not([class*='colorMode']):not(.theme-toggle-button) {
     display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     order: 2 !important;
     padding: 0.4rem !important;
     margin-left: 0.25rem !important;
+    flex-shrink: 0 !important;
   }
 
   .navbar__toggle svg {
@@ -2343,15 +2392,25 @@ button[class*='colorMode']:hover svg,
     margin-right: 0.35rem !important;
   }
 
+  /* Ensure theme toggle is visible and properly sized on extra small screens */
   .navbar__items--right [class*='colorModeToggle'],
   .navbar__items--right [class*='colorMode'],
+  .navbar__items--right button[class*='colorModeToggle'],
+  .navbar__items--right button[class*='toggleButton'],
   .navbar__items--right .theme-toggle-button,
+  button[class*='colorModeToggle'],
+  button[class*='colorMode'],
+  .theme-toggle-button,
   .clean-mode-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     width: 32px !important;
     height: 32px !important;
     min-width: 32px !important;
     min-height: 32px !important;
     padding: 0.35rem !important;
+    flex-shrink: 0 !important;
   }
 }
 

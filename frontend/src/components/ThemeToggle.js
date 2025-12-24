@@ -7,8 +7,8 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className={clsx('navbar__toggle', 'clean-btn', {
-        'navbar__toggle--active': theme === 'dark',
+      className={clsx('theme-toggle-button', 'clean-btn', {
+        'theme-toggle--active': theme === 'dark',
       })}
       onClick={toggleTheme}
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
