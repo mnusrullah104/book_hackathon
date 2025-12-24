@@ -1784,23 +1784,41 @@ a[class*='editThisPage'],
    BASE NAVBAR STYLES - Mobile First
    ============================================ */
 
+/* WHY NAVBAR WAS BROKEN ON MOBILE/TABLET:
+ * 1. The navbar__brand section was being hidden by display:none rules
+ * 2. Only the GitHub icon was visible because it was in navbar__items--right
+ * 3. Theme toggle and hamburger menu were hidden or not properly positioned
+ * 4. Mobile-first approach was missing proper flexbox layout
+ *
+ * THE FIX:
+ * 1. Ensure navbar__brand (logo + text) is ALWAYS visible on all screens
+ * 2. Add theme toggle and hamburger menu to right side on mobile/tablet
+ * 3. Use proper flexbox with justify-content: space-between
+ * 4. Ensure all elements have proper visibility and display properties
+ */
+
 /* Apply contrasting background color to navbar - ALWAYS VISIBLE */
 .navbar {
   background-color: var(--ifm-navbar-background-color) !important;
   box-shadow: var(--ifm-navbar-shadow) !important;
   border-bottom: none !important;
-  padding: 0.75rem 1.5rem !important;
+  padding: 0.75rem 1rem !important;
 
   /* CRITICAL: Sticky positioning to keep navbar at top */
   position: sticky !important;
   position: -webkit-sticky !important;
   top: 0 !important;
 
-  /* Ensure visibility */
+  /* Ensure visibility - NAVBAR MUST ALWAYS BE VISIBLE */
   visibility: visible !important;
   opacity: 1 !important;
   display: flex !important;
   z-index: 10000 !important;
+
+  /* Flexbox layout for proper spacing */
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
 
   /* Dimensions */
   min-height: 60px !important;
@@ -1855,21 +1873,51 @@ a[class*='editThisPage'],
   opacity: 1 !important;
 }
 
-/* Navbar brand (logo + title) - ALWAYS VISIBLE */
+/* Navbar brand (logo + title) - ALWAYS VISIBLE ON ALL SCREENS
+ * WHY BRAND WAS HIDDEN:
+ * Previous CSS might have had display:none or visibility:hidden on mobile
+ * The brand contains the logo icon and brand text which are essential
+ *
+ * THE FIX:
+ * Force display:flex and visibility:visible for brand on all screen sizes
+ */
 .navbar__brand {
   display: flex !important;
-  align-items: center;
+  align-items: center !important;
+  justify-content: flex-start !important;
   visibility: visible !important;
   opacity: 1 !important;
+  min-width: 0 !important;
+  flex-shrink: 0 !important;
   color: var(--ifm-navbar-link-color) !important;
   font-weight: 700 !important;
-  font-size: 1.25rem !important;
+  font-size: 1.1rem !important;
   transition: all 0.3s ease !important;
 }
 
 .navbar__brand:hover {
   color: var(--ifm-navbar-link-hover-color) !important;
   transform: translateX(2px);
+}
+
+/* Navbar title text - Ensure text is visible */
+.navbar__title {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 200px !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  font-size: inherit !important;
+}
+
+@media (min-width: 480px) {
+  .navbar__title {
+    max-width: 280px !important;
+  }
 }
 
 /* Navbar logo image */
@@ -1939,7 +1987,24 @@ html[data-theme='dark'] .navbar__link:hover {
    HAMBURGER MENU TOGGLE - Mobile/Tablet Only
    ============================================ */
 
-/* Hamburger menu button - VISIBLE on mobile/tablet (<996px) */
+/* WHY ONLY GITHUB ICON WAS VISIBLE:
+ * The navbar__items--right container had only the GitHub icon
+ * Theme toggle and hamburger menu were not properly included
+ * Or their display properties were overridden to none
+ *
+ * THE FIX:
+ * Ensure theme toggle and hamburger menu are in navbar__items--right
+ * Make sure all elements in the right section are visible on mobile/tablet
+ */
+
+/* Hamburger menu button - VISIBLE on mobile/tablet (<996px)
+ * WHY HAMBURGER WAS HIDDEN:
+ * Docusaurus default CSS hides .navbar__toggle on certain breakpoints
+ * The toggle class wasn't properly targeted or had display:none
+ *
+ * THE FIX:
+ * Force display:flex on toggle for mobile/tablet screens
+ */
 .navbar__toggle {
   display: inline-flex !important;
   visibility: visible !important;
@@ -1950,6 +2015,7 @@ html[data-theme='dark'] .navbar__link:hover {
   padding: 0.5rem !important;
   cursor: pointer;
   transition: all 0.2s ease !important;
+  order: 3 !important;
 }
 
 .navbar__toggle:hover {
@@ -1965,14 +2031,38 @@ html[data-theme='dark'] .navbar__link:hover {
   fill: currentColor !important;
 }
 
+/* Ensure navbar toggle is visible on all screen sizes for this project */
+.navbar-toggle {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Docusaurus mobile menu button class */
+.menu-button {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 /* ============================================
    THEME TOGGLE BUTTON - Always Visible
    ============================================ */
 
+/* WHY THEME TOGGLE WAS MISSING ON MOBILE/TABLET:
+ * The color mode toggle button was hidden by display:none
+ * Or it was positioned incorrectly in the navbar layout
+ *
+ * THE FIX:
+ * Force display:flex on theme toggle for all screen sizes
+ * Position it in navbar__items--right section
+ */
+
 button[class*='colorModeToggle'],
 button[class*='toggleButton'],
 button[class*='colorMode'],
-.navbar__toggle[class*='colorMode'] {
+.navbar__toggle[class*='colorMode'],
+.navbar__item[class*='colorMode'] {
   display: inline-flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -1989,6 +2079,7 @@ button[class*='colorMode'],
   min-height: 40px !important;
   margin: 0 !important;
   cursor: pointer;
+  order: 2 !important;
 }
 
 button[class*='colorModeToggle']:hover,
@@ -2024,8 +2115,10 @@ button[class*='colorMode']:hover svg {
    MEDIA QUERIES - Desktop vs Mobile/Tablet
    ============================================ */
 
-/* DESKTOP - >= 997px */
-/* Navbar fully visible with all items */
+/* DESKTOP - >= 997px
+ * WHY: On desktop, we have more space so we show all navbar items
+ * WHAT: Hamburger menu is hidden, all navigation links are visible
+ */
 @media (min-width: 997px) {
   .navbar {
     position: sticky !important;
@@ -2033,12 +2126,12 @@ button[class*='colorMode']:hover svg {
     top: 0 !important;
   }
 
-  /* Hide hamburger menu on desktop */
+  /* Hide hamburger menu on desktop - navigation links are visible */
   .navbar__toggle:not([class*='colorMode']) {
     display: none !important;
   }
 
-  /* All navbar items visible */
+  /* All navbar items visible on desktop */
   .navbar__items {
     display: flex !important;
   }
@@ -2052,8 +2145,11 @@ button[class*='colorMode']:hover svg {
   }
 }
 
-/* TABLET - 768px to 996px */
-/* Hamburger menu appears, navbar items hide */
+/* TABLET - 768px to 996px
+ * WHY: On tablet, we have limited space for navigation
+ * WHAT: Hamburger menu appears, Book/About links hidden in menu
+ * LAYOUT: Brand on left, Theme toggle + Hamburger on right
+ */
 @media (max-width: 996px) {
   .navbar {
     padding: 0.5rem 1rem !important;
@@ -2062,28 +2158,51 @@ button[class*='colorMode']:hover svg {
     top: 0 !important;
   }
 
-  /* Hide regular navbar items on tablet (use hamburger menu) */
+  /* Hide regular navbar items on tablet (use hamburger menu instead) */
   .navbar__items:not(.navbar__items--right) {
     display: none !important;
   }
 
-  /* Right section (toggle + theme) still visible */
+  /* Right section: Theme toggle + Hamburger menu + GitHub icon */
   .navbar__items--right {
     display: flex !important;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.25rem !important;
   }
 
-  /* Hamburger menu button visible */
+  /* Hamburger menu button visible on tablet */
   .navbar__toggle {
     display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    order: 3 !important;
+  }
+
+  /* Theme toggle visible on tablet */
+  .navbar__items--right [class*='colorMode'] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    order: 2 !important;
+  }
+
+  /* GitHub icon on tablet - keep it visible */
+  .navbar__items--right .navbar__item--github,
+  .navbar__items--right a[href*='github'] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    order: 1 !important;
   }
 }
 
-/* MOBILE - < 768px */
+/* MOBILE - < 768px
+ * WHY: On mobile, space is very limited
+ * WHAT: Compact layout with only essentials
+ * LAYOUT: Brand on left, Theme toggle + Hamburger on right
+ */
 @media (max-width: 767px) {
   .navbar {
     padding: 0.5rem 0.75rem !important;
@@ -2092,19 +2211,56 @@ button[class*='colorMode']:hover svg {
 
   .navbar__logo {
     height: 28px !important;
+    margin-right: 0.5rem !important;
   }
 
   .navbar__brand {
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
+    flex-shrink: 1 !important;
+  }
+
+  .navbar__title {
+    max-width: 120px !important;
+    font-size: 0.95rem !important;
   }
 
   .navbar__toggle {
     padding: 0.4rem !important;
+    order: 3 !important;
   }
 
   .navbar__toggle svg {
     width: 22px !important;
     height: 22px !important;
+  }
+
+  /* Theme toggle on mobile */
+  .navbar__items--right [class*='colorMode'] {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    padding: 0.4rem !important;
+    order: 2 !important;
+  }
+
+  /* GitHub icon on mobile */
+  .navbar__items--right .navbar__item--github,
+  .navbar__items--right a[href*='github'] {
+    display: none !important;
+    /* Hide GitHub on small mobile to save space */
+  }
+}
+
+/* EXTRA SMALL MOBILE - < 400px */
+@media (max-width: 400px) {
+  .navbar__title {
+    max-width: 80px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .navbar__logo {
+    height: 24px !important;
   }
 }
 
