@@ -1,0 +1,21 @@
+{
+  "name": "search_docs",
+  "description": "Search the documentation knowledge base for relevant information using semantic similarity. Use this tool when the user asks questions about ROS 2, robotics simulation, Isaac Sim, VLA (Vision-Language-Action models), or humanoid robots. The tool returns relevant document sections with source URLs.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "The search query. Should be a clear, specific question or topic to find relevant documentation. Examples: 'How to set up ROS 2 for humanoid robots?', 'Isaac Sim fundamentals', 'What is VLA?'"
+      },
+      "top_k": {
+        "type": "integer",
+        "description": "Number of relevant document chunks to retrieve. Default is 5. Use higher values (up to 10) for broad topics, lower values (3) for specific questions.",
+        "minimum": 1,
+        "maximum": 10,
+        "default": 5
+      }
+    },
+    "required": ["query"]
+  }
+}

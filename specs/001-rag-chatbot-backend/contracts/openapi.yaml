@@ -1,0 +1,521 @@
+openapi: 3.1.0
+info:
+  title: RAG Chatbot Backend API
+  description: |
+    FastAPI backend for AI-native textbook chatbot with Retrieval-Augmented Generation.
+    Provides endpoints for chat interactions, content ingestion, and health monitoring.
+  version: 1.0.0
+  contact:
+    name: RAG Chatbot Backend
+    url: https://github.com/your-repo/book_hackathon
+  license:
+    name: MIT
+
+servers:
+  - url: https://rag-chatbot-api.onrender.com
+    description: Production server (Render)
+  - url: http://localhost:8000
+    description: Local development server
+
+tags:
+  - name: Health
+    description: Service health and monitoring endpoints
+  - name: Chat
+    description: Chatbot conversation endpoints
+  - name: Ingestion
+    description: Content ingestion and indexing endpoints
+
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Health Check
+      description: Returns service health status and dependency availability
+      operationId: health_check
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                status: healthy
+                timestamp: '2025-12-24T10:30:00Z'
+                dependencies:
+                  qdrant: connected
+                  postgres: connected
+                  openai: available
+                response_time_ms: 45
+        '503':
+          description: Service is degraded or unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                status: degraded
+                timestamp: '2025-12-24T10:30:00Z'
+                dependencies:
+                  qdrant: disconnected
+                  postgres: connected
+                  openai: available
+                response_time_ms: 120
+                error_details:
+                  qdrant: 'Connection timeout after 5s'
+
+  /api/chat:
+    post:
+      tags:
+        - Chat
+      summary: Send Chat Message
+      description: |
+        Send a message to the chatbot and receive a response. Supports two modes:
+        - full_textbook: Answers questions using the entire textbook via semantic search
+        - selection_only: Answers questions strictly based on user-selected text
+      operationId: chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+            examples:
+              full_textbook_mode:
+                summary: Full textbook query
+                value:
+                  session_id: 550e8400-e29b-41d4-a716-446655440000
+                  mode: full_textbook
+                  message: What is inverse kinematics?
+              selection_only_mode:
+                summary: Selection-only query
+                value:
+                  session_id: 550e8400-e29b-41d4-a716-446655440001
+                  mode: selection_only
+                  message: Explain this code snippet
+                  selected_text: |
+                    def forward_kinematics(angles):
+                        # Calculate end effector position
+                        return position
+              new_session:
+                summary: New conversation (no session_id)
+                value:
+                  mode: full_textbook
+                  message: Tell me about humanoid robotics
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+              example:
+                session_id: 550e8400-e29b-41d4-a716-446655440000
+                message_id: 660e8400-e29b-41d4-a716-446655440000
+                response: |
+                  Inverse kinematics is the process of determining the joint angles needed to place a robot's end effector at a desired position and orientation. Unlike forward kinematics, which calculates the end effector position from known joint angles, inverse kinematics works backwards from the desired position to find the required angles.
+                retrieved_chunks: 5
+                timestamp: '2025-12-24T10:30:15Z'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                missing_selected_text:
+                  summary: Missing selected_text in selection_only mode
+                  value:
+                    error: ValidationError
+                    message: selected_text is required when mode is selection_only
+                    status_code: 400
+                invalid_mode:
+                  summary: Invalid mode value
+                  value:
+                    error: ValidationError
+                    message: mode must be one of [full_textbook, selection_only]
+                    status_code: 400
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: InternalServerError
+                message: Failed to generate response
+                status_code: 500
+
+  /api/sessions/{session_id}:
+    get:
+      tags:
+        - Chat
+      summary: Get Session History
+      description: Retrieve conversation history for a specific session
+      operationId: get_session_history
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Session identifier
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 50
+            minimum: 1
+            maximum: 100
+          description: Maximum number of messages to return
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+          description: Number of messages to skip (for pagination)
+      responses:
+        '200':
+          description: Session history retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionHistoryResponse'
+              example:
+                session_id: 550e8400-e29b-41d4-a716-446655440000
+                mode: full_textbook
+                created_at: '2025-12-24T10:00:00Z'
+                last_active: '2025-12-24T10:30:15Z'
+                message_count: 12
+                messages:
+                  - message_id: 660e8400-e29b-41d4-a716-446655440000
+                    role: user
+                    content: What is inverse kinematics?
+                    created_at: '2025-12-24T10:30:00Z'
+                  - message_id: 770e8400-e29b-41d4-a716-446655440000
+                    role: assistant
+                    content: Inverse kinematics is...
+                    created_at: '2025-12-24T10:30:15Z'
+        '404':
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: NotFoundError
+                message: Session not found
+                status_code: 404
+
+  /api/ingest:
+    post:
+      tags:
+        - Ingestion
+      summary: Ingest Textbook Content
+      description: |
+        Process and index textbook content for semantic search.
+        Accepts markdown files, chunks content, generates embeddings, and stores in vector database.
+      operationId: ingest_content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestRequest'
+            example:
+              source_dir: /path/to/textbook/markdown
+              overwrite: false
+              chunk_size: 512
+              chunk_overlap: 51
+      responses:
+        '200':
+          description: Ingestion completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+              example:
+                status: completed
+                total_files: 25
+                total_chunks: 487
+                ingestion_time_seconds: 45.3
+                timestamp: '2025-12-24T10:35:00Z'
+        '400':
+          description: Invalid ingestion request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: ValidationError
+                message: source_dir does not exist or is not accessible
+                status_code: 400
+        '500':
+          description: Ingestion failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: IngestionError
+                message: Failed to generate embeddings for chunk 42
+                status_code: 500
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - timestamp
+        - dependencies
+        - response_time_ms
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded, unhealthy]
+          description: Overall service health status
+        timestamp:
+          type: string
+          format: date-time
+          description: Health check execution time
+        dependencies:
+          type: object
+          required:
+            - qdrant
+            - postgres
+            - openai
+          properties:
+            qdrant:
+              type: string
+              enum: [connected, disconnected]
+            postgres:
+              type: string
+              enum: [connected, disconnected]
+            openai:
+              type: string
+              enum: [available, unavailable]
+        response_time_ms:
+          type: integer
+          minimum: 0
+          description: Health check response time in milliseconds
+        error_details:
+          type: object
+          additionalProperties:
+            type: string
+          description: Error details for failed dependency checks
+
+    ChatRequest:
+      type: object
+      required:
+        - mode
+        - message
+      properties:
+        session_id:
+          type: string
+          format: uuid
+          description: |
+            Session identifier for conversation continuity.
+            Omit to create a new session.
+        mode:
+          type: string
+          enum: [full_textbook, selection_only]
+          description: |
+            Query mode:
+            - full_textbook: Search entire textbook via semantic search
+            - selection_only: Answer strictly from user-selected text
+        message:
+          type: string
+          minLength: 1
+          maxLength: 5000
+          description: User's question or message
+        selected_text:
+          type: string
+          minLength: 1
+          maxLength: 10000
+          description: |
+            User-selected text (required when mode is selection_only).
+            The chatbot will answer based ONLY on this text.
+
+    ChatResponse:
+      type: object
+      required:
+        - session_id
+        - message_id
+        - response
+        - timestamp
+      properties:
+        session_id:
+          type: string
+          format: uuid
+          description: Session identifier (new or existing)
+        message_id:
+          type: string
+          format: uuid
+          description: Unique identifier for this assistant message
+        response:
+          type: string
+          description: Chatbot's generated response
+        retrieved_chunks:
+          type: integer
+          minimum: 0
+          description: Number of text chunks retrieved from vector database (0 for selection_only mode)
+        timestamp:
+          type: string
+          format: date-time
+          description: Response generation timestamp
+
+    SessionHistoryResponse:
+      type: object
+      required:
+        - session_id
+        - mode
+        - created_at
+        - last_active
+        - message_count
+        - messages
+      properties:
+        session_id:
+          type: string
+          format: uuid
+        mode:
+          type: string
+          enum: [full_textbook, selection_only]
+        created_at:
+          type: string
+          format: date-time
+        last_active:
+          type: string
+          format: date-time
+        message_count:
+          type: integer
+          minimum: 0
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+
+    Message:
+      type: object
+      required:
+        - message_id
+        - role
+        - content
+        - created_at
+      properties:
+        message_id:
+          type: string
+          format: uuid
+        role:
+          type: string
+          enum: [user, assistant]
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        tokens:
+          type: integer
+          minimum: 0
+          description: Token count for this message
+
+    IngestRequest:
+      type: object
+      required:
+        - source_dir
+      properties:
+        source_dir:
+          type: string
+          description: Path to directory containing markdown files
+        overwrite:
+          type: boolean
+          default: false
+          description: Whether to overwrite existing chunks from same source files
+        chunk_size:
+          type: integer
+          default: 512
+          minimum: 128
+          maximum: 2048
+          description: Target chunk size in tokens
+        chunk_overlap:
+          type: integer
+          default: 51
+          minimum: 0
+          maximum: 512
+          description: Overlap between chunks in tokens
+
+    IngestResponse:
+      type: object
+      required:
+        - status
+        - total_files
+        - total_chunks
+        - ingestion_time_seconds
+        - timestamp
+      properties:
+        status:
+          type: string
+          enum: [completed, partial, failed]
+        total_files:
+          type: integer
+          minimum: 0
+          description: Number of markdown files processed
+        total_chunks:
+          type: integer
+          minimum: 0
+          description: Number of chunks created and indexed
+        ingestion_time_seconds:
+          type: number
+          minimum: 0
+          description: Total ingestion time
+        timestamp:
+          type: string
+          format: date-time
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              file:
+                type: string
+              error:
+                type: string
+          description: Errors encountered during ingestion (if any)
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+        - status_code
+      properties:
+        error:
+          type: string
+          description: Error type/category
+        message:
+          type: string
+          description: Human-readable error message
+        status_code:
+          type: integer
+          description: HTTP status code
+        details:
+          type: object
+          additionalProperties: true
+          description: Additional error context (optional)
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: |
+        Optional API key for rate limiting and access control.
+        Not required for hackathon MVP but can be added for production.
+
+security:
+  - {}  # No security required for MVP
