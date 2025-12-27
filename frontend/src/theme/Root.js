@@ -1,6 +1,7 @@
 import React from 'react';
+import { AuthProvider } from '@site/src/components/auth/AuthContext';
 
-// Use Docusaurus's built-in theme system - no custom wrapper needed
+// Wrap app with AuthProvider to provide auth context to all pages
 export default function Root({ children }) {
-  return <>{children}</>;
+  return <AuthProvider>{children}</AuthProvider>;
 }
