@@ -2551,3 +2551,104 @@ html[data-theme='dark'] .sources-list a {
 html[data-theme='dark'] .sources-list a:hover {
   color: #DCD7FE;
 }
+
+/* ============================================
+   NAVBAR AUTH BUTTON
+   ============================================ */
+
+.navbar-auth-button {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  margin-right: 0.5rem;
+}
+
+.navbar-auth-button.login {
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-dark));
+  color: white;
+  box-shadow: 0 2px 8px rgba(109, 40, 217, 0.25);
+}
+
+.navbar-auth-button.login:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.35);
+}
+
+.navbar-auth-button.logout {
+  background: rgba(109, 40, 217, 0.1);
+  color: var(--ifm-color-primary);
+  border: 1px solid rgba(109, 40, 217, 0.2);
+}
+
+.navbar-auth-button.logout:hover {
+  background: rgba(109, 40, 217, 0.15);
+  border-color: var(--ifm-color-primary);
+}
+
+html[data-theme='dark'] .navbar-auth-button.logout {
+  background: rgba(168, 85, 247, 0.15);
+  color: #a78bfa;
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+html[data-theme='dark'] .navbar-auth-button.logout:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: #a78bfa;
+}
+
+.navbar-auth-button.loading {
+  min-width: 80px;
+  justify-content: center;
+}
+
+.navbar-auth-button .auth-icon {
+  font-size: 1rem;
+}
+
+.navbar-auth-button .auth-text {
+  font-weight: 600;
+}
+
+.auth-loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(109, 40, 217, 0.3);
+  border-top-color: var(--ifm-color-primary);
+  border-radius: 50%;
+  animation: authSpin 0.8s linear infinite;
+}
+
+@keyframes authSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile responsiveness for auth button */
+@media (max-width: 768px) {
+  .navbar-auth-button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8rem;
+    margin-right: 0.25rem;
+  }
+
+  .navbar-auth-button .auth-text {
+    display: none;
+  }
+
+  .navbar-auth-button .auth-icon {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar-auth-button {
+    padding: 0.25rem 0.5rem;
+  }
+}

@@ -21,6 +21,7 @@ import SearchBar from '@theme/SearchBar';
 import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved
@@ -69,6 +70,18 @@ function NavbarContentLayout({ left, right }) {
   );
 }
 
+// Auth button wrapper with BrowserOnly for SSR
+function AuthButtonWrapper() {
+  return (
+    <BrowserOnly fallback={<div className="navbar-auth-button loading"><span className="auth-loader"></span></div>}>
+      {() => {
+        const AuthButton = require('@site/src/components/navbar/AuthButton').default;
+        return <AuthButton />;
+      }}
+    </BrowserOnly>
+  );
+}
+
 export default function NavbarContent() {
   const mobileSidebar = useNavbarMobileSidebar();
   const items = useNavbarItems();
@@ -85,9 +98,10 @@ export default function NavbarContent() {
         </>
       }
       right={
-        // Right side: Navbar items + Theme toggle + Hamburger menu + Search
+        // Right side: Navbar items + Auth Button + Theme toggle + Hamburger menu + Search
         <>
           <NavbarItems items={rightItems} />
+          <AuthButtonWrapper />
           <NavbarColorModeToggle />
           {/* Always show hamburger menu on mobile/tablet */}
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
