@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
 
 from .models.database import settings, init_db
-from .api.routes import health, auth
+from .api.routes import health, auth, chat
 from .api.middleware.security import SecurityHeadersMiddleware
 from .api.middleware.auth import AuthMiddleware
 from .api.middleware.logging import structured_logger
@@ -33,6 +33,7 @@ app.state.limiter = limiter
 # Note: Auth routes must be included BEFORE AuthMiddleware to allow authentication
 app.include_router(auth.router)
 app.include_router(health.router, tags=["Health"])
+app.include_router(chat.router, tags=["Chat"])
 
 # Health check endpoint
 @app.get("/health")
