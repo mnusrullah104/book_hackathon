@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 // Backend API URL
-const API_URL = process.env.API_URL || 'http://localhost:7860/api';
+const API_URL = 'https://mnusrulah104-robotics-rag-backend.hf.space/api';
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState([]);
@@ -36,7 +36,7 @@ export default function ChatInterface() {
       const response = await fetch(`${API_URL}/chat/message`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+
         body: JSON.stringify({ message: userMessage.content }),
       });
 
