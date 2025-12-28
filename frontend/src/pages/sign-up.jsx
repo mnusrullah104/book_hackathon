@@ -1,12 +1,17 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-import SignUpForm from '@site/src/components/auth/SignUpForm';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 export default function SignUpPage() {
   return (
     <Layout title="Sign Up" description="Create a new account">
       <div className="auth-page">
-        <SignUpForm />
+        <BrowserOnly fallback={<div className="loading-container"><p>Loading...</p></div>}>
+          {() => {
+            const SignUpForm = require('@site/src/components/auth/SignUpForm').default;
+            return <SignUpForm />;
+          }}
+        </BrowserOnly>
       </div>
     </Layout>
   );

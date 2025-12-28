@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '@site/src/context/AuthContext';
 
 export default function SignUpForm() {
   const [email, setEmail] = useState('');

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '@site/src/context/AuthContext';
 
 // Backend API URL
 const API_URL = 'https://mnusrulah104-robotics-rag-backend.hf.space/api';
