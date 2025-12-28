@@ -1,0 +1,319 @@
+openapi: 3.0.3
+info:
+  title: Authenticated RAG Backend API
+  description: FastAPI backend with authentication and RAG chat endpoints
+  version: 1.0.0
+  contact:
+    name: Book Hackathon Team
+  license:
+    name: MIT
+
+servers:
+  - url: https://your-space.hf.space
+    description: Hugging Face Spaces production environment
+  - url: http://localhost:7860
+    description: Local development
+
+tags:
+  - name: Health
+    description: System health and readiness
+  - name: Authentication
+    description: User registration, sign-in, sign-out
+  - name: Chat
+    description: Protected RAG chat endpoints
+
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Returns system health status for monitoring and load balancers
+      tags: [Health]
+      responses:
+        '200':
+          description: System is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [healthy]
+                    example: healthy
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: '2025-12-27T10:30:00Z'
+                required: [status, timestamp]
+
+  /api/auth/register:
+    post:
+      summary: Register new user account
+      description: Creates a new user account with email and password. Email must be unique.
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: User email address
+                  example: user@example.com
+                password:
+                  type: string
+                  minLength: 8
+                  description: User password (min 8 characters)
+                  example: SecurePass123
+              required: [email, password]
+      responses:
+        '201':
+          description: User account created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    format: uuid
+                    description: Newly created user ID
+                    example: '550e8400-e29b-41d4-a716-446655440000'
+                  email:
+                    type: string
+                    format: email
+                    example: user@example.com
+                  message:
+                    type: string
+                    example: Account created successfully
+                required: [user_id, email, message]
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                detail: 'Email format is invalid'
+        '409':
+          description: Email already registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                detail: 'Email already in use'
+
+  /api/auth/sign-in:
+    post:
+      summary: Sign in with email and password
+      description: Authenticates user credentials and creates session. Sets httpOnly session cookie.
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  example: SecurePass123
+              required: [email, password]
+      responses:
+        '200':
+          description: Sign-in successful, session cookie set
+          headers:
+            Set-Cookie:
+              description: Session cookie (httpOnly, secure, SameSite=lax)
+              schema:
+                type: string
+                example: 'session_token=abc123; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    format: uuid
+                    example: '550e8400-e29b-41d4-a716-446655440000'
+                  email:
+                    type: string
+                    format: email
+                    example: user@example.com
+                  message:
+                    type: string
+                    example: Signed in successfully
+                required: [user_id, email, message]
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                detail: 'Invalid email or password'
+        '429':
+          description: Rate limit exceeded (10 attempts per 5 minutes)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                detail: 'Too many sign-in attempts. Please try again later.'
+          headers:
+            Retry-After:
+              description: Seconds until rate limit resets
+              schema:
+                type: integer
+                example: 300
+
+  /api/auth/sign-out:
+    post:
+      summary: Sign out and terminate session
+      description: Invalidates session and clears session cookie. Requires valid session.
+      tags: [Authentication]
+      security:
+        - SessionCookie: []
+      responses:
+        '200':
+          description: Sign-out successful, session cookie cleared
+          headers:
+            Set-Cookie:
+              description: Clear session cookie
+              schema:
+                type: string
+                example: 'session_token=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Signed out successfully
+                required: [message]
+        '401':
+          description: No valid session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                detail: 'Not authenticated'
+
+  /api/chat/message:
+    post:
+      summary: Send message to RAG system
+      description: Transmits user message to RAG backend and returns response. Requires valid session. Enforces per-user rate limiting (10 req/min).
+      tags: [Chat]
+      security:
+        - SessionCookie: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  minLength: 1
+                  maxLength: 10000
+                  description: User's question or prompt
+                  example: 'What are the key principles of AI safety?'
+                conversation_id:
+                  type: string
+                  format: uuid
+                  description: Optional conversation ID for context continuation
+                  example: '550e8400-e29b-41d4-a716-446655440000'
+              required: [message]
+      responses:
+        '200':
+          description: Message processed successfully, response returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_message_id:
+                      type: string
+                      format: uuid
+                      description: ID of user's message
+                      example: '550e8400-e29b-41d4-a716-446655440001'
+                  response:
+                      type: string
+                      description: RAG system response
+                      example: 'The key principles of AI safety include...'
+                  response_message_id:
+                      type: string
+                      format: uuid
+                      description: ID of RAG response message
+                      example: '550e8400-e29b-41d4-a716-446655440002'
+                  conversation_id:
+                      type: string
+                      format: uuid
+                      description: Conversation ID for context
+                      example: '550e8400-e29b-41d4-a716-446655440000'
+                  timestamp:
+                      type: string
+                      format: date-time
+                      description: Response timestamp
+                      example: '2025-12-27T10:35:00Z'
+                required: [user_message_id, response, conversation_id, timestamp]
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                detail: 'Authentication required'
+        '429':
+          description: Rate limit exceeded (10 requests per minute per user)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                detail: 'Rate limit exceeded. Please wait before sending another message.'
+          headers:
+            Retry-After:
+              description: Seconds until rate limit resets
+              schema:
+                type: integer
+                example: 45
+        '503':
+          description: Backend service unavailable or RAG query timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                detail: 'Service temporarily unavailable. Please try again later.'
+
+components:
+  securitySchemes:
+    SessionCookie:
+      type: apiKey
+      in: cookie
+      name: session_token
+      description: httpOnly, secure, SameSite=lax session cookie
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message
+          example: 'Invalid request'
+      required: [detail]

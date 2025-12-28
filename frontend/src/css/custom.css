@@ -2500,3 +2500,54 @@ div[class*='docMainContainer'] {
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
+
+/* ============================================
+   CHAT INTERFACE - SOURCES DISPLAY
+   ============================================ */
+
+.message-sources {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  font-size: 0.85rem;
+}
+
+.sources-label {
+  font-weight: 600;
+  color: var(--ifm-color-purple-primary);
+  margin-bottom: 0.5rem;
+}
+
+.sources-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.sources-list li {
+  margin-bottom: 0.25rem;
+}
+
+.sources-list a {
+  color: var(--ifm-color-purple-secondary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  word-break: break-all;
+}
+
+.sources-list a:hover {
+  color: var(--ifm-color-purple-primary);
+  text-decoration: underline;
+}
+
+html[data-theme='dark'] .sources-label {
+  color: var(--ifm-color-purple-accent);
+}
+
+html[data-theme='dark'] .sources-list a {
+  color: var(--ifm-color-purple-lightest);
+}
+
+html[data-theme='dark'] .sources-list a:hover {
+  color: #DCD7FE;
+}
