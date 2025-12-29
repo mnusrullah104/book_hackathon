@@ -1,7 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-// Backend API URL
-const API_URL = process.env.API_URL || 'http://localhost:7860/api';
+import { API_URL } from '@site/src/utils/api';
 
 const AuthContext = createContext(null);
 
@@ -13,11 +11,17 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     async function checkSession() {
       try {
-        // Ping protected endpoint to validate session
+        // Add timeout to prevent hanging
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
         const response = await fetch(`${API_URL}/auth/verify`, {
           method: 'GET',
           credentials: 'include',
+          signal: controller.signal,
         });
+
+        clearTimeout(timeoutId);
 
         if (response.ok) {
           const data = await response.json();
@@ -25,10 +29,13 @@ export function AuthProvider({ children }) {
         } else {
           setUser(null);
         }
-        setLoading(false);
       } catch (error) {
-        console.error('Session check error:', error);
+        // Don't log abort errors
+        if (error.name !== 'AbortError') {
+          console.error('Session check error:', error);
+        }
         setUser(null);
+      } finally {
         setLoading(false);
       }
     }
@@ -94,6 +101,7 @@ export function AuthProvider({ children }) {
       setUser(null);
       return { success: true };
     } catch (error) {
+      setUser(null); // Clear user anyway on error
       return { success: false, error: error.message };
     }
   }

@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { sendChatMessage } from '@site/src/utils/api';
+import { API_URL, sendChatMessage } from '@site/src/utils/api';
+
+// Generate unique ID (fallback for browsers without crypto.randomUUID)
+function generateId() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return 'msg-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+}
 
 /**
  * Professional ChatBot UI Component
@@ -15,7 +23,9 @@ export default function ChatBot() {
 
   // Auto-scroll to bottom when messages change
   const scrollToBottom = useCallback(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, []);
 
   useEffect(() => {
@@ -26,7 +36,8 @@ export default function ChatBot() {
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
+      const newHeight = Math.min(textareaRef.current.scrollHeight, 120);
+      textareaRef.current.style.height = newHeight + 'px';
     }
   }, [input]);
 
@@ -39,11 +50,11 @@ export default function ChatBot() {
   }, [error]);
 
   const handleSend = async (e) => {
-    e?.preventDefault();
+    if (e) e.preventDefault();
     if (!input.trim() || isTyping) return;
 
     const userMessage = {
-      id: crypto.randomUUID(),
+      id: generateId(),
       role: 'user',
       content: input.trim(),
       timestamp: new Date(),
@@ -60,7 +71,7 @@ export default function ChatBot() {
 
     if (result.success) {
       const botMessage = {
-        id: result.data.response_message_id || crypto.randomUUID(),
+        id: result.data.response_message_id || generateId(),
         role: 'assistant',
         content: result.data.response,
         sources: result.data.sources || [],
@@ -84,23 +95,31 @@ export default function ChatBot() {
     }
   };
 
+  const handleQuickPrompt = (prompt) => {
+    setInput(prompt);
+  };
+
   const formatTime = (date) => {
-    return new Date(date).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    try {
+      return new Date(date).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    } catch {
+      return '';
+    }
   };
 
   const renderSources = (sources) => {
     if (!sources || sources.length === 0) return null;
     return (
       <div className="chatbot-sources">
-        <span className="sources-title">📚 Sources:</span>
+        <span className="sources-title">Sources:</span>
         <ul className="sources-list">
           {sources.map((source, idx) => (
             <li key={idx}>
               <a href={source} target="_blank" rel="noopener noreferrer">
-                {source.length > 60 ? `${source.substring(0, 60)}...` : source}
+                {source.length > 60 ? source.substring(0, 60) + '...' : source}
               </a>
             </li>
           ))}
@@ -114,7 +133,14 @@ export default function ChatBot() {
       {/* Chat Header */}
       <div className="chatbot-header">
         <div className="chatbot-header-info">
-          <div className="chatbot-avatar">🤖</div>
+          <div className="chatbot-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"></path>
+              <circle cx="8" cy="14" r="1"></circle>
+              <circle cx="12" cy="14" r="1"></circle>
+              <circle cx="16" cy="14" r="1"></circle>
+            </svg>
+          </div>
           <div className="chatbot-header-text">
             <h3>Robotics AI Assistant</h3>
             <span className="chatbot-status">
@@ -129,21 +155,40 @@ export default function ChatBot() {
       <div className="chatbot-messages">
         {messages.length === 0 ? (
           <div className="chatbot-welcome">
-            <div className="welcome-icon">💬</div>
+            <div className="welcome-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
             <h3>Welcome to Robotics AI</h3>
             <p>Ask me about ROS2, Isaac Sim, robotics, or VLA models!</p>
             <div className="quick-prompts">
-              <button onClick={() => setInput('What is ROS2?')}>What is ROS2?</button>
-              <button onClick={() => setInput('Explain Isaac Sim')}>Explain Isaac Sim</button>
-              <button onClick={() => setInput('How do VLA models work?')}>How do VLA models work?</button>
+              <button type="button" onClick={() => handleQuickPrompt('What is ROS2?')}>
+                What is ROS2?
+              </button>
+              <button type="button" onClick={() => handleQuickPrompt('Explain Isaac Sim')}>
+                Explain Isaac Sim
+              </button>
+              <button type="button" onClick={() => handleQuickPrompt('How do VLA models work?')}>
+                How do VLA models work?
+              </button>
             </div>
           </div>
         ) : (
           <>
             {messages.map((msg) => (
-              <div key={msg.id} className={`chatbot-message ${msg.role}`}>
+              <div key={msg.id} className={'chatbot-message ' + msg.role}>
                 <div className="message-avatar">
-                  {msg.role === 'user' ? '👤' : '🤖'}
+                  {msg.role === 'user' ? (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"></path>
+                    </svg>
+                  )}
                 </div>
                 <div className="message-wrapper">
                   <div className="message-bubble">
@@ -158,7 +203,11 @@ export default function ChatBot() {
             {/* Typing Indicator */}
             {isTyping && (
               <div className="chatbot-message assistant">
-                <div className="message-avatar">🤖</div>
+                <div className="message-avatar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"></path>
+                  </svg>
+                </div>
                 <div className="message-wrapper">
                   <div className="message-bubble typing-indicator">
                     <span></span>
@@ -176,9 +225,15 @@ export default function ChatBot() {
       {/* Error Toast */}
       {error && (
         <div className="chatbot-error">
-          <span className="error-icon">⚠️</span>
+          <span className="error-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </span>
           <span>{error}</span>
-          <button onClick={() => setError(null)} className="error-close">×</button>
+          <button type="button" onClick={() => setError(null)} className="error-close">×</button>
         </div>
       )}
 
@@ -202,8 +257,9 @@ export default function ChatBot() {
             {isTyping ? (
               <span className="send-loader"></span>
             ) : (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
               </svg>
             )}
           </button>

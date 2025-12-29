@@ -1,5 +1,15 @@
-// Backend API URL - Production HuggingFace endpoint
-const API_URL = 'https://mnusrulah104-robotics-rag-backend.hf.space/api';
+// Centralized API URL configuration
+// Uses Vite environment variable or falls back to production default
+const getApiBaseUrl = () => {
+  // Check for Vite environment variable
+  if (import.meta.env?.VITE_PUBLIC_API_BASE_URL) {
+    return import.meta.env.VITE_PUBLIC_API_BASE_URL;
+  }
+  // Fallback to production HuggingFace endpoint
+  return 'https://mnusrulah104-robotics-rag-backend.hf.space/api';
+};
+
+export const API_URL = getApiBaseUrl();
 
 /**
  * Generic API request helper with error handling

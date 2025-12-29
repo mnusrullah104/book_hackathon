@@ -1,23 +1,22 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+
+// Import styles
 import '@site/src/css/chatbot.css';
 
-function ChatPageContent() {
-  const { useAuth } = require('@site/src/context/AuthContext');
-  const ChatBot = require('@site/src/components/chat/ChatBot').default;
+// ChatBot component loaded only on client side
+function ChatBotLoader() {
+  const [Component, setComponent] = React.useState(null);
 
-  const { user, loading } = useAuth();
-
-  // Redirect to sign-in if not authenticated
   React.useEffect(() => {
-    if (!loading && !user) {
-      window.location.href = '/sign-in';
-    }
-  }, [user, loading]);
+    // Dynamically import ChatBot to avoid SSR issues
+    import('@site/src/components/chat/ChatBot').then((mod) => {
+      setComponent(() => mod.default);
+    });
+  }, []);
 
-  // Show loading state
-  if (loading) {
+  if (!Component) {
     return (
       <div className="chat-loading">
         <div className="chat-loading-spinner"></div>
@@ -26,16 +25,7 @@ function ChatPageContent() {
     );
   }
 
-  // Don't render if no user (will redirect)
-  if (!user) {
-    return (
-      <div className="chat-loading">
-        <p>Redirecting to sign in...</p>
-      </div>
-    );
-  }
-
-  return <ChatBot />;
+  return <Component />;
 }
 
 export default function ChatPage() {
@@ -45,13 +35,15 @@ export default function ChatPage() {
       description="AI-powered robotics assistant"
       noFooter
     >
-      <BrowserOnly fallback={
-        <div className="chat-loading">
-          <div className="chat-loading-spinner"></div>
-          <p>Loading chat...</p>
-        </div>
-      }>
-        {() => <ChatPageContent />}
+      <BrowserOnly
+        fallback={
+          <div className="chat-loading">
+            <div className="chat-loading-spinner"></div>
+            <p>Loading chat...</p>
+          </div>
+        }
+      >
+        {() => <ChatBotLoader />}
       </BrowserOnly>
     </Layout>
   );
