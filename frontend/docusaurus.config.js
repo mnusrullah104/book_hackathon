@@ -76,12 +76,6 @@ const config = {
             position: 'left',
           },
           {
-            to: '/chat',
-            label: '💬 AI Chat',
-            position: 'left',
-            className: 'navbar-chat-link',
-          },
-          {
             href: 'https://github.com/mnusrullah104/BookWriting_Hackathon1',
             label: 'GitHub',
             position: 'right',

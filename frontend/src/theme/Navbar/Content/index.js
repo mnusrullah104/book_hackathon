@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import {
   useThemeConfig,
@@ -24,7 +24,6 @@ import NavbarSearch from '@theme/Navbar/Search';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
 function useNavbarItems() {
-  // TODO temporary casting until ThemeConfig type is improved
   return useThemeConfig().navbar.items;
 }
 
@@ -70,6 +69,35 @@ function NavbarContentLayout({ left, right }) {
   );
 }
 
+// Custom Chat Navbar Item - Only visible on Book pages
+function ChatNavbarItem() {
+  const [isBookPage, setIsBookPage] = useState(false);
+
+  useEffect(() => {
+    const checkPath = () => {
+      const path = window.location.pathname;
+      // Show AI Chat only on docs/book pages (paths starting with /docs)
+      setIsBookPage(path.startsWith('/docs') || path === '/book');
+    };
+
+    checkPath();
+    window.addEventListener('locationchange', checkPath);
+    return () => window.removeEventListener('locationchange', checkPath);
+  }, []);
+
+  if (!isBookPage) return null;
+
+  return (
+    <NavbarItem
+      to="/chat"
+      label="AI Chat"
+      position="left"
+      className="navbar-chat-link"
+      prepend
+    />
+  );
+}
+
 // Auth button wrapper with BrowserOnly for SSR
 function AuthButtonWrapper() {
   return (
@@ -91,19 +119,18 @@ export default function NavbarContent() {
   return (
     <NavbarContentLayout
       left={
-        // Left side: Logo + Title only (no hamburger)
         <>
           <NavbarLogo />
           <NavbarItems items={leftItems} />
+          {/* AI Chat - Only visible on Book pages */}
+          <ChatNavbarItem />
         </>
       }
       right={
-        // Right side: Navbar items + Auth Button + Theme toggle + Hamburger menu + Search
         <>
           <NavbarItems items={rightItems} />
           <AuthButtonWrapper />
           <NavbarColorModeToggle />
-          {/* Always show hamburger menu on mobile/tablet */}
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
           {!searchBarItem && (
             <NavbarSearch>

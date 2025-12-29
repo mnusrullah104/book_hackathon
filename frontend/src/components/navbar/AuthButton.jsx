@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { API_URL } from '@site/src/utils/api';
 
+// Theme purple color
+const THEME_PURPLE = '#6D28D9';
+
 /**
  * Navbar Auth Button Component
- * Self-contained auth state management to avoid SSR issues
+ * Shows only ONE auth button at a time based on context:
+ * - Sign In button on most pages
+ * - Sign Up button on /sign-up page
+ * - User menu dropdown when logged in
  */
 export default function AuthButton() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [currentPath, setCurrentPath] = useState('/');
 
-  // Check auth status on mount
+  // Check auth status and current path on mount
   useEffect(() => {
     let mounted = true;
+
+    // Get current path
+    setCurrentPath(window.location.pathname);
 
     async function checkAuth() {
       try {
@@ -43,7 +53,7 @@ export default function AuthButton() {
     // Small delay to ensure browser is ready
     const timer = setTimeout(checkAuth, 100);
 
-    // Also set a fallback to show button after 2 seconds
+    // Fallback to show button after 2 seconds
     const fallbackTimer = setTimeout(() => {
       if (mounted) setLoading(false);
     }, 2000);
@@ -94,7 +104,7 @@ export default function AuthButton() {
     };
   }, [showDropdown]);
 
-  // Show loading state briefly
+  // Show loading state
   if (loading) {
     return (
       <div className="navbar-auth-button loading">
@@ -103,15 +113,16 @@ export default function AuthButton() {
     );
   }
 
-  // User is logged in - show user icon with dropdown
+  // User is logged in - show user menu with dropdown
   if (user) {
     return (
       <div className="navbar-auth-container logged-in">
         <button
           type="button"
-          className="navbar-auth-button logout"
+          className="navbar-auth-button user-menu"
           onClick={() => setShowDropdown(!showDropdown)}
-          title={user.email ? 'Signed in as ' + user.email : 'Account menu'}
+          aria-expanded={showDropdown}
+          title={user.email ? 'Account: ' + user.email : 'Account menu'}
         >
           <span className="auth-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -143,23 +154,31 @@ export default function AuthButton() {
     );
   }
 
-  // User is not logged in - show Sign In and Sign Up buttons
+  // User is NOT logged in - show ONLY one button based on current page
+  const isSignUpPage = currentPath === '/sign-up';
+  const isSignInPage = currentPath === '/sign-in';
+
   return (
     <div className="navbar-auth-container logged-out">
-      <button
-        type="button"
-        className="navbar-auth-button sign-up"
-        onClick={handleSignUp}
-      >
-        <span className="auth-text">Sign Up</span>
-      </button>
-      <button
-        type="button"
-        className="navbar-auth-button login"
-        onClick={handleLogin}
-      >
-        <span className="auth-text">Sign In</span>
-      </button>
+      {isSignUpPage ? (
+        // On Sign Up page - show Sign In link
+        <button
+          type="button"
+          className="navbar-auth-button sign-in"
+          onClick={handleLogin}
+        >
+          <span className="auth-text">Sign In</span>
+        </button>
+      ) : (
+        // On all other pages - show Sign Up button
+        <button
+          type="button"
+          className="navbar-auth-button sign-up"
+          onClick={handleSignUp}
+        >
+          <span className="auth-text">Sign Up</span>
+        </button>
+      )}
     </div>
   );
 }
