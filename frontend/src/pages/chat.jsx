@@ -1,46 +1,50 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '@theme/Layout';
-import { useAuth } from '@site/src/context/AuthContext';
-import ChatInterface from '@site/src/components/chat/ChatInterface';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export default function ChatPage() {
-  const { user, loading } = useAuth();
+// Import styles
+import '@site/src/css/chatbot.css';
 
-  // Redirect to sign-in if not authenticated
-  useEffect(() => {
-    if (!loading && !user) {
-      window.location.href = '/sign-in';
-    }
-  }, [user, loading]);
+// ChatBot component loaded only on client side
+function ChatBotLoader() {
+  const [Component, setComponent] = React.useState(null);
 
-  // Show loading state
-  if (loading) {
+  React.useEffect(() => {
+    // Dynamically import ChatBot to avoid SSR issues
+    import('@site/src/components/chat/ChatBot').then((mod) => {
+      setComponent(() => mod.default);
+    });
+  }, []);
+
+  if (!Component) {
     return (
-      <Layout title="Loading...">
-        <div className="loading-container">
-          <div className="loading-spinner">
-            <span className="loading-dots">...</span>
-          </div>
-          <p>Loading...</p>
-        </div>
-      </Layout>
+      <div className="chat-loading">
+        <div className="chat-loading-spinner"></div>
+        <p>Loading chat...</p>
+      </div>
     );
   }
 
-  // Don't render if no user (will redirect)
-  if (!user) {
-    return null;
-  }
+  return <Component />;
+}
 
+export default function ChatPage() {
   return (
     <Layout
-      title="Chat"
-      description="AI-powered chat interface"
+      title="AI Chat"
+      description="AI-powered robotics assistant"
       noFooter
     >
-      <div className="chat-page">
-        <ChatInterface />
-      </div>
+      <BrowserOnly
+        fallback={
+          <div className="chat-loading">
+            <div className="chat-loading-spinner"></div>
+            <p>Loading chat...</p>
+          </div>
+        }
+      >
+        {() => <ChatBotLoader />}
+      </BrowserOnly>
     </Layout>
   );
 }
